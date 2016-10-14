@@ -1,5 +1,5 @@
 # _WINGMAN: A web based TTS & STT chat application_
-[![airbnb]](https://img.shields.io/badge/style-plastic-green.svg?style=airbnb)
+(https://img.shields.io/badge/style-plastic-green.svg?style=airbnb)
 [![MyGet](https://img.shields.io/myget/mongodb/v/MongoDB.Driver.Core.svg?maxAge=2592000)]()
 [![node](https://img.shields.io/node/v/gh-badges.svg?maxAge=2592000?style=plastic)]()
 
