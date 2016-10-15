@@ -1,45 +1,54 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { MuiThemeProvider, getMuiTheme } from 'material-ui/styles';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import { AppBar, FlatButton } from 'material-ui';
-import { browserHistory } from 'react-router';
-
+import { AppBar } from 'material-ui';
 import NavBarProps from '../Components/NavBar/NavBarProps';
 
-console.log('NavBarProps', NavBarProps);
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log('super(props): ', super(props));
+    console.log('props: ', props);
+    this.state = {
+      mainTitle: 'Wingman'
+    }
+  }
 
-const App = ({ children }) => {
-  // const PROPS = {
-  //   title: "Wingman",
-  //   appButtons: () => (
-  //     <div>
-  //       <FlatButton
-  //         label="Login"
-  //         onClick={() => browserHistory.push('/Login')}
-  //       />
-  //       <FlatButton
-  //         label="Register"
-  //         onClick={() => browserHistory.push('/Register')}
-  //       />
-  //     </div>
-  //   ),
-  // };
+  setNavBarTitle = () => { //eslint-disable-line
+    
+  }
 
-  return (
-    <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)} >
-      <div>
-        <AppBar
-          title="Wingman"
-          iconElementRight={NavBarProps.appButtons()}
-        />
-        {children}
-      </div>
-    </MuiThemeProvider>
-  )
+  render() {
+    return (
+      <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)} >
+        <div>
+          <AppBar
+            title={this.state.mainTitle}
+            iconElementRight={NavBarProps.appButtons()}
+            />
+          {props.children}
+        </div>
+      </MuiThemeProvider>
+    )
+  }
 };
 
 App.propTypes = {
   children: PropTypes.object, //eslint-disable-line
-}
+};
 
 export default App;
+
+/*
+  App inherits the following props:
+
+  {
+  children: Object,
+  history:Object,
+  location:Object,
+  params:Object,
+  route:Object,
+  routeParams:Object,
+  routes: Array
+  }
+*/
