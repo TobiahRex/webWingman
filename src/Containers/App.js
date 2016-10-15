@@ -14,8 +14,8 @@ export default class App extends React.Component {
     }
   }
 
-  setNavBarTitle = () => { //eslint-disable-line
-    
+  setNavBarTitle = () => {
+
   }
 
   render() {
@@ -36,8 +36,6 @@ export default class App extends React.Component {
 App.propTypes = {
   children: PropTypes.object, //eslint-disable-line
 };
-
-export default App;
 
 /*
   App inherits the following props:
