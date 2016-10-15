@@ -2,7 +2,7 @@ import React from 'react';
 import { FlatButton } from 'material-ui';
 import { browserHistory } from 'react-router';
 
-export const PROPS = {
+const NavBarProps = {
   title: "Wingman",
   appButtons: () => (
     <div>
@@ -17,3 +17,6 @@ export const PROPS = {
     </div>
   ),
 };
+
+console.log('NavBarProps', NavBarProps);
+export default NavBarProps;
