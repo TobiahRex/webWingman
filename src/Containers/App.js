@@ -7,6 +7,7 @@ const App = ({ children, location }) => (
   <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)} >
     <div>
       <NavBar {...location} />
+      {console.log('children: ', children)}
       {children}
     </div>
   </MuiThemeProvider>

@@ -1,5 +1,5 @@
 import React from 'react';
-import muiCard from '../Components/muiCard';
+import RegisterCard from '../Components/muiCard';
 
 // export default class Register extends React.Component {
 //   render = () => (
@@ -8,9 +8,8 @@ import muiCard from '../Components/muiCard';
 // }
 const Register = () => (
   <div>
-    <muiCard />
+    <RegisterCard title="Register" />
   </div>
 );
-Register.displayName = 'Register';
 
 export default Register;
