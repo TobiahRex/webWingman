@@ -4,29 +4,31 @@ import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import { AppBar, FlatButton } from 'material-ui';
 import { browserHistory } from 'react-router';
 
+import { NavBarProps } from '../Components/NavBar/NavbarProps';
+
 const App = ({ children }) => {
-  const PROPS = {
-    title: "Wingman",
-    appButtons: () => (
-      <div>
-        <FlatButton
-          label="Login"
-          onClick={() => browserHistory.push('/Login')}
-        />
-        <FlatButton
-          label="Register"
-          onClick={() => browserHistory.push('/Register')}
-        />
-      </div>
-    )
-  }
+  // const PROPS = {
+  //   title: "Wingman",
+  //   appButtons: () => (
+  //     <div>
+  //       <FlatButton
+  //         label="Login"
+  //         onClick={() => browserHistory.push('/Login')}
+  //       />
+  //       <FlatButton
+  //         label="Register"
+  //         onClick={() => browserHistory.push('/Register')}
+  //       />
+  //     </div>
+  //   ),
+  // };
 
   return (
     <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)} >
       <div>
         <AppBar
           title="Wingman"
-          iconElementRight={PROPS.appButtons()}
+          iconElementRight={NavBarProps.appButtons()}
         />
         {children}
       </div>
