@@ -13,6 +13,9 @@ export default class NavBar extends React.Component {
       case '/Login': {
         this.setState({ title: 'Welcome Back!' });
       } break;
+      case '/Register': {
+        this.setState({ title: 'Let\'s Get Started!' });
+      } break;
       default: {
         this.setState({ title: 'Wingman Chat' });
       } break;

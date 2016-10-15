@@ -8,15 +8,18 @@ const NavBarProps = {
     <div>
       <FlatButton
         label="Login"
-        onClick={() => browserHistory.push('/Login')}
+        onClick={() => { browserHistory.push('/Login'); }}
       />
       <FlatButton
         label="Register"
-        onClick={() => browserHistory.push('/Register')}
+        onClick={() => { browserHistory.push('/Register'); }}
+      />
+      <FlatButton
+        label="Home"
+        onClick={() => { browserHistory.push('/'); }}
       />
     </div>
   ),
 };
-
-console.log('NavBarProps', NavBarProps);
 export default NavBarProps;
+NavBarProps.appButtons.displayName = 'Login&RegisterButons';
