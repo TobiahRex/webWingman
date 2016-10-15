@@ -1,17 +1,38 @@
 import React, { PropTypes } from 'react';
 import { MuiThemeProvider, getMuiTheme } from 'material-ui/styles';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import { AppBar } from 'material-ui';
-import SnackBar from '../Components/ApiSnackBar';
+import { AppBar, FlatButton } from 'material-ui';
+import { browserHistory } from 'react-router';
 
-const App = ({ children }) => (
-  <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)} >
-    <div>
-      <AppBar title="React Template" />
-      {children}
-    </div>
-  </MuiThemeProvider>
-);
+const App = ({ children }) => {
+  const PROPS = {
+    title: "Wingman",
+    appButtons: () => (
+      <div>
+        <FlatButton
+          label="Login"
+          onClick={() => browserHistory.push('/Login')}
+        />
+        <FlatButton
+          label="Register"
+          onClick={() => browserHistory.push('/Register')}
+        />
+      </div>
+    )
+  }
+
+  return (
+    <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)} >
+      <div>
+        <AppBar
+          title="Wingman"
+          iconElementRight={PROPS.appButtons()}
+        />
+        {children}
+      </div>
+    </MuiThemeProvider>
+  )
+};
 
 App.propTypes = {
   children: PropTypes.object, //eslint-disable-line

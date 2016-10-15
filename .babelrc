@@ -1,7 +1,9 @@
 {
   "presets": ["es2015", "react"],
+  "plugins": ["transform-react-display-name"],
   "env": {
     "development": {
+      "plugins": ["transform-react-jsx-source"],
       "presets": ["react-hmre"]
     }
   }

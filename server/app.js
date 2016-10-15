@@ -6,18 +6,20 @@ import path from 'path';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
+import favicon from 'serve-favicon';
+import historyApiFallback from 'connect-history-api-fallback';
 
 const PORT = process.env.PORT || 3001;
-const MONGO = process.env.MONGODB_URI || 'mongodb://localhost/template';
+const MONGO = process.env.MONGODB_URI || 'mongodb://localhost/webWingman';
 const BUILD = process.env.NODE_ENV || 'development';
 const app = express();
 const api = require('./api');
-
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
+app.use(favicon(path.join(__dirname, '../public', 'images', 'favicon.ico')));
 app.use((req, res, next) => {
   res.handle = (err, data) => {
     console.log('Response Error: ', err, '\nResponse Data: ', data);
@@ -46,10 +48,11 @@ if (BUILD === 'development') {
 }
 
 app.use('/api', api);
+app.use(historyApiFallback());
 app.get('*', (req, res) => {
   let indexFile;
   if (BUILD === 'development') {
-    indexFile = path.join(__dirname, '../src/index.html');
+    indexFile = path.join(__dirname, '../public/index.html');
   } else {
     indexFile = path.join(__dirname, './index.html');
   }

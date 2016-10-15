@@ -11,7 +11,9 @@ const devConfig = {
   debug: true,
   entry: [
     'webpack-hot-middleware/client?reload=true',
-    './src/Styles/style.css',
+    './public/css/animate.min.css',
+    './public/css/toastr.min.css',
+    './public/css/style.css',
     './src/index.js',
   ],
   output: {
@@ -29,7 +31,7 @@ const devConfig = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.ProvidePlugin({
       $: "jquery",
-      jQuery: "jquery"
+      jQuery: "jquery",
     }),
     new webpack.DefinePlugin({
       'process.env': {

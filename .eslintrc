@@ -6,7 +6,8 @@
     "airbnb"
   ],
   "plugins": [
-    "react"
+    "react",
+    "babel"
   ],
   "parserOptions": {
     "ecmaVersion": 6,
@@ -31,6 +32,16 @@
     "import/no-extraneous-dependencies": [2, { "devDependencies": true } ],
     "no-underscore-dangle":["error",{"allow": ["_id"]}],
     "new-cap": ["error", {"capIsNewExceptions":["Router"]}],
-    "no-use-before-define": ["error", { "functions": false, "classes": true }]
+    "no-use-before-define": ["error", { "functions": false, "classes": true }],
+    # eslint-plugin-babel rules
+    "babel/generator-star-spacing": 0,
+    "babel/new-cap": 1,
+    "babel/array-bracket-spacing": 1,
+    "babel/object-curly-spacing": 0,
+    "babel/object-shorthand": 1,
+    "babel/arrow-parens": 0,
+    "babel/no-await-in-loop": 1,
+    "babel/flow-object-type": 1,
+    "babel/func-params-comma-dangle": 1
   }
 }
