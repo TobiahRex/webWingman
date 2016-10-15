@@ -4,7 +4,9 @@ import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import { AppBar, FlatButton } from 'material-ui';
 import { browserHistory } from 'react-router';
 
-import { NavBarProps } from '../Components/NavBar/NavbarProps';
+import NavBarProps from '../Components/NavBar/NavBarProps';
+
+console.log('NavBarProps', NavBarProps);
 
 const App = ({ children }) => {
   // const PROPS = {
