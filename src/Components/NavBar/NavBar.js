@@ -1,26 +1,32 @@
-import React from 'react';
-import { browserHistory } from 'react-router';
+import React, { PropTypes } from 'react';
 import { AppBar } from 'material-ui';
 import NavBarProps from './NavBarProps';
 
 export default class NavBar extends React.Component {
-
   state = {
-    currentLocation: '',
+    title: '',
   }
 
-  setTitleBar = () => {
-    const currentLocation = this.props;
-    console.log('currentLocation', currentLocation);
+  componentWillMount() {
+    const currentUrl = this.props.pathname;
+    switch (currentUrl) {
+      case '/Login': {
+        this.setState({ title: 'Welcome Back!' });
+      } break;
+      default: {
+        this.setState({ title: 'Wingman Chat' });
+      } break;
+    }
   }
 
-  render() {
-    console.log('browserHistory: ', browserHistory);
-    return (
-      <AppBar
-        title={this.state.mainTitle}
-        iconElementRight={NavBarProps.appButtons()}
-      />
-    )
-  }
+  render = () => (
+    <AppBar
+      title={this.state.title}
+      iconElementRight={NavBarProps.appButtons()}
+    />
+  );
 }
+
+NavBar.propTypes = {
+  pathname: PropTypes.string,
+};
