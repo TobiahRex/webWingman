@@ -1,10 +1,12 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { browserHistory } from 'react-router';
+import { AppBar } from 'material-ui';
 import NavBarProps from './NavBarProps';
 
 export default class NavBar extends React.Component {
 
   state = {
-    currentLocation: ''
+    currentLocation: '',
   }
 
   setTitleBar = () => {
@@ -13,6 +15,7 @@ export default class NavBar extends React.Component {
   }
 
   render() {
+    console.log('browserHistory: ', browserHistory);
     return (
       <AppBar
         title={this.state.mainTitle}
