@@ -32,18 +32,18 @@ const loginAttempt = () => ({
   attempting: true,
 });
 
-const loginSuccess = (state, { username }) => ({
+const loginSuccess = ({ username }) => ({
   username,
   active: true,
   attempting: false,
 });
 
-const loginFailure = (state, { error }) => ({
+const loginFailure = ({ error }) => ({
   error,
   attempting: false,
 });
 
-const logout = (state, { userID }) => ({
+const logout = ({ userID }) => ({
   userID,
   attempting: false,
 });
