@@ -33,6 +33,16 @@ const changedSettings = ({ settings }) => ({
   settings,
 });
 
+const update = ({ updatedUser }) => ({
+  userID: updatedUser.userID,
+  username: updatedUser.username,
+  email: updatedUser.email,
+  lastLogin: updatedUser.lastLogin,
+  location: updatedUser.location,
+  photoUrl: updatedUser.photoUrl,
+  settings: updatedUser.settings,
+});
+
 const logout = () => ({
   userID: null,
   username: null,
@@ -46,6 +56,7 @@ const logout = () => ({
 // ----- Create Reducer ----- //
 export const userReducer = createReducer(INITIAL_STATE, {
   [Types.USER_RECEIVED]: received,
+  [Types.USER_UPDATE_RECEIVED]: update,
   [Types.USER_SETTINGS_RECEIVED]: changedSettings,
   [Types.LOGOUT_SUCCESS]: logout,
 });
