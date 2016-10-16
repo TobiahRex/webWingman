@@ -10,17 +10,17 @@ import {
 } from 'material-ui';
 
 
-const RegisterCard = props => (
+const RegisterCard = ({ title, onInputChange, submitNewUser }) => (
   <Card>
     <CardText>
-      {props.title}
+      {title}
     </CardText>
 
     <CardText>
       <TextField
         floatingLabelText="Email"
         hintText="Email"
-        onChange={e => props.onInputChange(e)}
+        onChange={e => onInputChange(e)}
       />
       <br />
       <TextField floatingLabelText="Password" />
@@ -36,16 +36,16 @@ const RegisterCard = props => (
       <RaisedButton
         label="Register"
         secondary
+        onClick={submitNewUser}
       />
     </CardActions>
   </Card>
 );
-// onClick={props.submitNewUser}
 
 RegisterCard.propTypes = {
   title: PropTypes.string,
-  submitNewUser: PropTypes.func.isRequired,
   onInputChange: PropTypes.func.isRequired,
+  submitNewUser: PropTypes.func.isRequired,
 };
 
 export default RegisterCard;
