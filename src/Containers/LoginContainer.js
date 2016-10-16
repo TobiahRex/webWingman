@@ -1,9 +1,9 @@
 import React from 'react';
-import MuiCard from '../Components/muiCard';
+import LoginCard from '../Components/LoginCard';
 
 const Login = () => (
   <div>
-    <MuiCard title="Login" />
+    <LoginCard title="Login" />
   </div>
 );
 

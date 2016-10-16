@@ -18,7 +18,7 @@ const Things = ({ fetching, createThing, editThing, removeThing, things, apiStat
     fetching,
     createThing,
     apiStatus,
-  }
+  };
 
   return (
     <Card>
@@ -37,8 +37,8 @@ Things.propTypes = {
   createThing: PropTypes.func.isRequired,
   editThing: PropTypes.func.isRequired,
   removeThing: PropTypes.func.isRequired,
-  things: PropTypes.array.isRequired,
-  apiStatus: PropTypes.object.isRequired,
+  things: PropTypes.array.isRequired, // eslint-disable-line
+  apiStatus: PropTypes.object.isRequired, // eslint-disable-line
 };
 
 const mapStateToProps = state => ({
