@@ -2,6 +2,7 @@ import { createActions, createReducer } from 'reduxsauce';
 
 export const { Types, Creators } = createActions({
   userReceived: ['userObj'],
+  userSettingsReceived: ['settings'],
   logoutSuccess: null,
 });
 
@@ -28,6 +29,10 @@ const received = ({ user }) => ({
   settings: user.settings,
 });
 
+const changedSettings = ({ settings }) => ({
+  settings,
+});
+
 const logout = () => ({
   userID: null,
   username: null,
@@ -41,5 +46,6 @@ const logout = () => ({
 // ----- Create Reducer ----- //
 export const userReducer = createReducer(INITIAL_STATE, {
   [Types.USER_RECEIVED]: received,
+  [Types.USER_SETTINGS_RECEIVED]: changedSettings,
   [Types.LOGOUT_SUCCESS]: logout,
 });
