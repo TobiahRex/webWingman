@@ -36,11 +36,11 @@ const RegisterCard = props => (
       <RaisedButton
         label="Register"
         secondary
-        onClick={props.submitNewUser}
       />
     </CardActions>
   </Card>
 );
+// onClick={props.submitNewUser}
 
 RegisterCard.propTypes = {
   title: PropTypes.string,
