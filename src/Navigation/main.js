@@ -1,14 +1,15 @@
 import React from 'react';
 import { Route, Router, IndexRoute } from 'react-router';
 import App from '../Containers/App';
-import Things from '../Containers/Things';
-import Login from '../Containers/Login';
-// import Register from '../Containers/Register';
+import Things from '../Containers/ThingsContainer';
+import Login from '../Containers/LoginContainer';
+import Register from '../Containers/RegisterContainer';
 
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={Things} />
     <Router path="Login" component={Login} />
+    <Router path="Register" component={Register} />
   </Route>
 );
 

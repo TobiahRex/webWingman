@@ -36,7 +36,10 @@ const devConfig = {
     new webpack.DefinePlugin({
       'process.env': {
         DEV: JSON.stringify(process.env.DEV),
-        TEST_GLOBAL: JSON.stringify(process.env.TEST_GLOBAL),
+        FIREBASE_KEY: JSON.stringify(process.env.FIREBASE_KEY),
+        FIREBASE_DOMAIN: JSON.stringify(process.env.FIREBASE_DOMAIN),
+        FIREBASE_DB_URL: JSON.stringify(process.env.FIREBASE_DB_URL),
+        FIREBASE_BUCKET: JSON.stringify(process.env.FIREBASE_BUCKET),
       },
     }),
   ],

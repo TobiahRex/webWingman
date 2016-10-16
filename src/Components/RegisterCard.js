@@ -9,23 +9,34 @@ import {
   TextField,
 } from 'material-ui';
 
-
 const RegisterCard = ({ title, onInputChange, submitNewUser }) => (
   <Card>
     <CardText>
-      {title}
+      {title || "EMPTY prop"}
     </CardText>
 
     <CardText>
       <TextField
+        id="registerEmail"
         floatingLabelText="Email"
         hintText="Email"
-        onChange={e => onInputChange(e)}
+        onChange={e =>
+          onInputChange(e.target.value, e.target.getAttribute('id'))}
       />
       <br />
-      <TextField floatingLabelText="Password" />
+      <TextField
+        id="registerPwd"
+        floatingLabelText="Password"
+        onChange={e =>
+          onInputChange(e.target.value, e.target.getAttribute('id'))}
+      />
       <br />
-      <TextField floatingLabelText="Confirm Password" />
+      <TextField
+        id="registerPwdConfirm"
+        floatingLabelText="Confirm Password"
+        onChange={e =>
+        onInputChange(e.target.value, e.target.getAttribute('id'))}
+      />
       <br />
     </CardText>
     <CardActions>

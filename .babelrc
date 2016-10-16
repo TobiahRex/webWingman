@@ -3,8 +3,8 @@
   "plugins": ["transform-react-display-name"],
   "env": {
     "development": {
-      "plugins": ["transform-react-jsx-source"],
-      "presets": ["react-hmre"]
+      "presets": ["react-hmre"],
+      "plugins": ["transform-react-jsx-source", "transform-react-display-name"],
     }
   }
 }

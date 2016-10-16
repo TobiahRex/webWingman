@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import RegisterCard from '../Components/RegisterCard';
-// import Actions from '../Redux/RegisterRedux'
+import Actions from '../Redux/AuthRedux';
 
 class RegisterContainer extends React.Component {
   static propTypes = {
-    // registerUser: PropTypes.func.isRequired,
+    registerUser: PropTypes.func.isRequired,
   }
   constructor(props) {
     super(props);
@@ -36,19 +36,20 @@ class RegisterContainer extends React.Component {
     }
   }
   submitNewUser = () => {
-    // this.props.registerUser(this.state);
+    this.props.registerUser(this.state);
   }
   render = () => {
     console.log('this.state: ', this.state);
     return (
-    <div>
-      <RegisterCard {...this.RegisterProps} />
-    </div>
-  )};
+      <div>
+        <RegisterCard {...this.RegisterProps} />
+      </div>
+    );
+  };
 }
 
 const mapDispatchToProps = dispatch => ({
-  // registerUser: infoObj => dispatch(Actions.registerUser(infoObj)),
+  registerUser: infoObj => dispatch(Actions.registerUser(infoObj)),
 });
 
 export default connect(null, mapDispatchToProps)(RegisterContainer);

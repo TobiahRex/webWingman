@@ -64,7 +64,7 @@ export default class muiToast extends React.Component {
       open: this.state.show,
       message: this.state.message,
       autoHideDuration: 2000,
-      onRequestClose: () => this.setState({ show: false })
+      onRequestClose: () => this.setState({ show: false }),
     };
     return (
       <div>

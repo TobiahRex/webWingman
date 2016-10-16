@@ -11,7 +11,6 @@ import routes from './Navigation/main';
 
 injectTapEventPlugin();
 const store = createStore();
-
 render(
   <Provider store={store} >
     <Router history={browserHistory} routes={routes} />
@@ -19,6 +18,9 @@ render(
   ,
   document.getElementById('app')
 );
+
+const { dispatch } = store;
+export default dispatch;
 
 
 /*
