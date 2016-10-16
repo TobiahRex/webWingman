@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { browserHistory } from 'react-router';
 import {
   Card,
   CardText,
@@ -8,14 +9,19 @@ import {
   TextField,
 } from 'material-ui';
 
-const muiCard = ({ title }) => (
+
+const RegisterCard = props => (
   <Card>
     <CardText>
-      {title}
+      {props.title}
     </CardText>
 
     <CardText>
-      <TextField floatingLabelText="Email" hintText="Email" />
+      <TextField
+        floatingLabelText="Email"
+        hintText="Email"
+        onChange={e => props.onInputChange(e)}
+      />
       <br />
       <TextField floatingLabelText="Password" />
       <br />
@@ -23,14 +29,23 @@ const muiCard = ({ title }) => (
       <br />
     </CardText>
     <CardActions>
-      <FlatButton label="Need to Login?" />
-      <RaisedButton label="Register" secondary />
+      <FlatButton
+        label="Need to Login?"
+        onClick={() => { browserHistory.push('/Login'); }}
+      />
+      <RaisedButton
+        label="Register"
+        secondary
+        onClick={props.submitNewUser}
+      />
     </CardActions>
   </Card>
 );
 
-muiCard.propTypes = {
+RegisterCard.propTypes = {
   title: PropTypes.string,
+  submitNewUser: PropTypes.func.isRequired,
+  onInputChange: PropTypes.func.isRequired,
 };
 
-export default muiCard;
+export default RegisterCard;
