@@ -26,6 +26,11 @@
     "node": true,
     "jquery": true,
   },
+  {
+    "globals": {
+      "User": true
+    }
+  },
   "rules": {
     "quotes": 0,
     "forbid-prop-types": "off",
