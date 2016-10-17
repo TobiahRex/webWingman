@@ -1,7 +1,9 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
+import Promise from 'bluebird';
 import jwt from 'json-web-token';
 import moment from 'moment';
+
+const bcrypt = Promise.promisify(require('bcrypt'));
 
 let JWT_SECRET = process.env.JWT_SECRET;
 
@@ -17,13 +19,14 @@ userSchema.statics.obtainUsers = (cb) => {
 
 userSchema.statics.registerNewUser = (newUser, cb) => {
   User.findOne({ email: newUser.email }).exec()
-  .then(dbUser => {
-    bcrypt.hash(newUser.password, 12, (err, hash) => {
-      if (err) return cb(err);
-      newUser.password = hash;
-      return User.create(newUser);
-    })
+  .then((dbUser) => {
+    if (dbUser) return cb({ ERROR: 'That user already exists' });
+    return bcrypt.hashAsync(newUser.password, 12);
   })
-  .then()
+  .then((hash) => {
+    newUser.password = hash;
+    return User.create(newUser);
+  })
+  .then(dbUser => cb(null, dbUser))
   .catch(err => cb(err));
-}
+};
