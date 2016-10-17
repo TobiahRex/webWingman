@@ -6,7 +6,7 @@ import moment from 'moment';
 import bcryptJS from 'bcrypt';
 import Email from './utility/EmailPromise';
 
-const bcrypt = Promise.promisify(bcryptJS);
+const BCRYPT = Promise.promisify(bcryptJS);
 const JWT = Promise.promisify(npmJWT);
 
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -23,30 +23,62 @@ userSchema.statics.obtainUsers = function (cb) {
 };
 
 userSchema.statics.registerNewUser = function (newUser, cb) {
+  let dbUserRef;
   this.findOne({ email: newUser.email }).exec()
   .then((dbUser) => {
     if (dbUser) return cb({ ERROR: 'That user already exists' });
-    return bcrypt.hashAsync(newUser.password, 12);
+    return BCRYPT.hashAsync(newUser.password, 12);
   })
   .then((hash) => {
     newUser.password = hash;
     return this.create(newUser);
   })
-  .then(dbUser => Email.verify(dbUser))
+  .then((dbUser) => {
+    dbUserRef = dbUser;
+    return dbUser.profileLink();
+  })
+  .then((link) => {
+    dbUserRef.profileLink = link;
+    return Email.verify(dbUserRef);
+  })
+  .then(() => { // this thenable will execute when the user clicks the link in their email.
+    dbUserRef.verified = true;
+    return cb(null, dbUserRef);
+  })
   .catch(err => cb(err));
 };
 
 userSchema.method.profileLink = function () {
-  let profileLink;
   const expiration = moment().add(1, 'w').unix();
   const payload = {
     expiration,
     _id: this._id,
   };
-  JWT.encodeAsync(payload, JWT_SECRET)
-  .then(token => (profileLink = `${HOSTED_URL}/api/users/verify/${token}`))
-  .catch(() => (profileLink = 'JWT encode threw Error.'));
-  return profileLink;
+  return JWT.encodeAsync(payload, JWT_SECRET);
+  // .then(token => (`${HOSTED_URL}/api/users/verify/${token}`))
+  // .catch(() => ('JWT encode threw Error.'));
+};
+
+userSchema.statics.authenticate = function ({ username, password }, cb) {
+  if (!username || !password) return cb({ ERROR: 'Required username || password missing.' });
+  let dbUserRef;
+  let tokenRef;
+
+  return this.findOne({ username }).exec()
+  .then((dbUser) => {
+    dbUserRef = dbUser;
+    return BCRYPT.compareAsync(password, dbUser.password);
+  })
+  .then(() => {
+    tokenRef = dbUserRef.createToken();
+    dbUserRef.lastLogin = new Date();
+    return dbUserRef.save();
+  })
+  .then((savedUser) => {
+    savedUser.password = null;
+    return cb({ tokenRef, savedUser });
+  })
+  .catch(err => cb({ ERROR: 'Authentication Error', err }));
 };
 
 userSchema.statics.authorize = function () { // add role default value to args if needed.
@@ -63,6 +95,10 @@ userSchema.statics.authorize = function () { // add role default value to args i
     })
     .catch(res.handle);
   };
+};
+
+userSchema.methods.createToken = function () {
+  return JWT.encodeAsync({ _id: this._id }, JWT_SECRET);
 };
 
 const User = mongoose.model('User', userSchema);

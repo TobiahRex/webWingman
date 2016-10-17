@@ -1,5 +1,6 @@
 import Promise from 'bluebird';
-//
+import moment from 'moment';
+
 // const bcrypt = Promise.promisifyAll(require('bcrypt'));
 // // bcrypt.hash('tobiahrex', 10, (err, hash) => {
 // //   console.log('hash: ', hash);
@@ -20,18 +21,35 @@ import Promise from 'bluebird';
 // // .then(hash => console.log('hash: ', hash))
 // // .catch((err) => console.log('err: ', err));
 //
-//
 // bcrypt.hashAsync('TobiahRex', 10)
-// .then(hash => console.log('hash: ', hash))
+// .then(hash => bcrypt.compareAsync('TobiahRex', hash))
+// .then(result => console.log('result: ', result))
 // .catch(err => console.log('err: ', err));
 
-const JWT_promisified = Promise.promisifyAll(require('json-web-token'));
-const JWT_native = require('json-web-token');
+//
+//
+const JWT = Promise.promisifyAll(require('json-web-token'));
+//
+//
+// let token;
+//
+// JWT.encodeAsync('this is a test secret', { id: 123 })
+// .then(res => JWT.decodeAsync('this is a test secret', res))
+// .then(res => console.log('DECODE res: ', res))
+// .catch(err => console.log('err: ', err));
 
+function testProfileLink() {
+  const expiration = moment().add(1, 'w').unix();
+  const payload = {
+    expiration,
+    _id: 'asdfasdfasdfasdf',
+  };
+  return JWT.encodeAsync('this is a test secret', payload);
+}
 
-let token;
-
-JWT.encodeAsync('this is a test secret', { id: 123 })
-.then(res => JWT.decodeAsync('this is a test secret', res))
-.then(res => console.log('DECODE res: ', res))
-.catch(err => console.log('err: ', err));
+testProfileLink()
+.then(token => {
+  console.log('token: ', token);
+  `http://localhost:3000/api/users/verify/${token}`
+})
+.catch(() => console.log('JWT encode threw Error.'));

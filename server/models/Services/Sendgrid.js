@@ -6,6 +6,13 @@ export default {
     const subject = 'Registration Confirmation for Watchman';
     const fromEmail = new sendgrid.mail.Email('Registration@Watchman.com');
     const toEmail = new sendgrid.mail.Email(`${userInfo.Email}`);
+    let profileLink;
+    userInfo.profileLink()
+    .then(token => )
+    .catch(err => cb(err));
+
+
+
     const content = new sendgrid.mail.Content('text/html',
     `<html>
       <h1>Hi, ${userInfo.Firstname}</h1>
