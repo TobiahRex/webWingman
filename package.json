@@ -112,6 +112,7 @@
     "reduxsauce": "^0.2.0",
     "request": "^2.75.0",
     "sass-loader": "^4.0.2",
+    "sendgrid": "^4.7.0",
     "serve-favicon": "^2.3.0",
     "style-loader": "^0.13.1",
     "toastr": "^2.1.2",

@@ -1,15 +1,17 @@
-/* global User*/
+/* global clearance*/
 import mongoose from 'mongoose';
 import Promise from 'bluebird';
-// import jwt from 'json-web-token';
-// import moment from 'moment';
+import npmJWT from 'json-web-token';
+import moment from 'moment';
 import bcryptJS from 'bcrypt';
 import Email from './utility/EmailPromise';
 
-const Mail = 'make this a route to ./mail';
-
 const bcrypt = Promise.promisify(bcryptJS);
-// const JWT_SECRET = process.env.JWT_SECRET;
+const JWT = Promise.promisify(npmJWT);
+
+const JWT_SECRET = process.env.JWT_SECRET;
+const HOSTED_URL = process.env.HOSTED_URL;
+
 const userSchema = new mongoose.Schema({
 
 });
@@ -30,8 +32,37 @@ userSchema.statics.registerNewUser = function (newUser, cb) {
     newUser.password = hash;
     return this.create(newUser);
   })
-  .then(dbUser => RegisterEmail.verify())
+  .then(dbUser => Email.verify(dbUser))
   .catch(err => cb(err));
+};
+
+userSchema.method.profileLink = function () {
+  let profileLink;
+  const expiration = moment().add(1, 'w').unix();
+  const payload = {
+    expiration,
+    _id: this._id,
+  };
+  JWT.encodeAsync(payload, JWT_SECRET)
+  .then(token => (profileLink = `${HOSTED_URL}/api/users/verify/${token}`))
+  .catch(() => (profileLink = 'JWT encode threw Error.'));
+  return profileLink;
+};
+
+userSchema.statics.authorize = function () { // add role default value to args if needed.
+  return (req, res, next) => { // eslint-disable-line
+    const tokenHeader = req.headers.authorization;
+    if (!tokenHeader) return res.status(400).send({ ERROR: 'User note found.' });
+
+    const token = tokenHeader.split(' ')[1]; // this will extract JWT from header.
+    JWT.decodeAsync(token, JWT_SECRET)
+    .then(payload => this.findById(payload._id).select({ password: false }).exec())
+    .then((dbUser) => {
+      req.user = dbUser;
+      return next();
+    })
+    .catch(res.handle);
+  };
 };
 
 const User = mongoose.model('User', userSchema);

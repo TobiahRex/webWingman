@@ -1,11 +1,13 @@
-import Email = 'make this a route to ./email';
+import sgEmail from '../Services/Sendgrid';
 
 export default {
-  verify: (userInfo) => new Promise((res, res) => {
-    Email.verify(userInfo, response => {
-      if (response.statusCode !== 202) return rej(response);
-      userInfo._Password = null;
-      return res(response);
+  verify(userInfo) {
+    return new Promise((resolve, reject) => {
+      sgEmail.verify(userInfo, (response) => {
+        if (response.statusCode !== 202) return reject(response);
+        userInfo.password = null;
+        return resolve(response);
+      });
     });
-  });
-}
+  },
+};

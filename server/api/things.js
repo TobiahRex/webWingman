@@ -1,7 +1,7 @@
 import express from 'express';
-import Thing from '../db/Thing';
+import Thing from '../models/Thing';
 
-const router = express.Router();
+const router = express.Router(); //eslint-disable-line
 
 router.get('/:thingId', (req, res) => Thing.findById(req.params.thingId, res.handle));
 
