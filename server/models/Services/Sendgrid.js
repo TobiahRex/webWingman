@@ -1,24 +1,16 @@
 import sendgrid from 'sendgrid';
 
-
 export default {
   verify(userInfo, cb) {
     const subject = 'Registration Confirmation for Watchman';
     const fromEmail = new sendgrid.mail.Email('Registration@Watchman.com');
     const toEmail = new sendgrid.mail.Email(`${userInfo.Email}`);
-    let profileLink;
-    userInfo.profileLink()
-    .then(token => )
-    .catch(err => cb(err));
-
-
-
     const content = new sendgrid.mail.Content('text/html',
     `<html>
       <h1>Hi, ${userInfo.Firstname}</h1>
       <br>
       <p>
-        Please verify your new account by clicking <a href="${userInfo.profileLink()}">HERE</a>
+        Please verify your new account by clicking <a href="${userInfo.profileLink}">HERE</a>
       </p>
       <br>
       <h2>Thanks!

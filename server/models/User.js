@@ -11,7 +11,6 @@ const JWT = Promise.promisify(npmJWT);
 
 const JWT_SECRET = process.env.JWT_SECRET;
 const HOSTED_URL = process.env.HOSTED_URL;
-
 const userSchema = new mongoose.Schema({
 
 });
@@ -37,8 +36,8 @@ userSchema.statics.registerNewUser = function (newUser, cb) {
     dbUserRef = dbUser;
     return dbUser.profileLink();
   })
-  .then((link) => {
-    dbUserRef.profileLink = link;
+  .then((token) => {
+    dbUserRef.profileLink = `${HOSTED_URL}/api/users/verify/${token}`;
     return Email.verify(dbUserRef);
   })
   .then(() => { // this thenable will execute when the user clicks the link in their email.
@@ -55,8 +54,6 @@ userSchema.method.profileLink = function () {
     _id: this._id,
   };
   return JWT.encodeAsync(payload, JWT_SECRET);
-  // .then(token => (`${HOSTED_URL}/api/users/verify/${token}`))
-  // .catch(() => ('JWT encode threw Error.'));
 };
 
 userSchema.statics.authenticate = function ({ username, password }, cb) {
