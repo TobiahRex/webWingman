@@ -1,4 +1,11 @@
-/* global clearance*/
+/* global User*/
+/* TODO: Make sure you check username @ registration
+if they supplied a username, then require an email.
+If they supplied an email, then username is optional,
+but make the value of "username" the email value &&&&
+the "email" value the email.
+*/
+
 import mongoose from 'mongoose';
 import Promise from 'bluebird';
 import npmJWT from 'json-web-token';
@@ -11,8 +18,24 @@ const JWT = Promise.promisify(npmJWT);
 
 const JWT_SECRET = process.env.JWT_SECRET;
 const HOSTED_URL = process.env.HOSTED_URL;
-const userSchema = new mongoose.Schema({
 
+const ObjectId = mongoose.Schema.Types.ObjectId;
+const userSchema = new mongoose.Schema({
+  roles: {
+    super: { type: Boolean, default: false },
+    admin: { type: Boolean, default: false },
+  },
+  username: { type: String, required: true },
+  password: { type: String, required: true },
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
+  email: { type: String, required: true },
+  verified: { type: Boolean, default: false },
+  oAuths: [{
+    type: String,
+  }],
+  lastLogin: { type: Date, default: Date.now },
+  settings: { type: ObjectId, ref: 'Settings' },
 });
 
 userSchema.statics.obtainUsers = function (cb) {
@@ -21,6 +44,7 @@ userSchema.statics.obtainUsers = function (cb) {
   .catch(err => cb(err));
 };
 
+/* ----- User Auth Methods & Statics ----- */
 userSchema.statics.registerNewUser = function (newUser, cb) {
   let dbUserRef;
   this.findOne({ email: newUser.email }).exec()
@@ -46,16 +70,6 @@ userSchema.statics.registerNewUser = function (newUser, cb) {
   })
   .catch(err => cb(err));
 };
-
-userSchema.method.profileLink = function () {
-  const expiration = moment().add(1, 'w').unix();
-  const payload = {
-    expiration,
-    _id: this._id,
-  };
-  return JWT.encodeAsync(payload, JWT_SECRET);
-};
-
 userSchema.statics.authenticate = function ({ username, password }, cb) {
   if (!username || !password) return cb({ ERROR: 'Required username || password missing.' });
   let dbUserRef;
@@ -77,7 +91,6 @@ userSchema.statics.authenticate = function ({ username, password }, cb) {
   })
   .catch(err => cb({ ERROR: 'Authentication Error', err }));
 };
-
 userSchema.statics.authorize = function () { // add role default value to args if needed.
   return (req, res, next) => { // eslint-disable-line
     const tokenHeader = req.headers.authorization;
@@ -94,6 +107,14 @@ userSchema.statics.authorize = function () { // add role default value to args i
   };
 };
 
+userSchema.methods.profileLink = function () {
+  const expiration = moment().add(1, 'w').unix();
+  const payload = {
+    expiration,
+    _id: this._id,
+  };
+  return JWT.encodeAsync(payload, JWT_SECRET);
+};
 userSchema.methods.createToken = function () {
   return JWT.encodeAsync({ _id: this._id }, JWT_SECRET);
 };
