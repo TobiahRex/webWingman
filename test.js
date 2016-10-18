@@ -26,8 +26,7 @@ import moment from 'moment';
 // .then(result => console.log('result: ', result))
 // .catch(err => console.log('err: ', err));
 
-//
-//
+
 const JWT = Promise.promisifyAll(require('json-web-token'));
 //
 //

@@ -13,10 +13,10 @@ import moment from 'moment';
 import bcryptJS from 'bcrypt';
 import Email from './utility/EmailPromise';
 
-const BCRYPT = Promise.promisify(bcryptJS);
-const JWT = Promise.promisify(npmJWT);
+const BCRYPT = Promise.promisifyAll(bcryptJS);
+const JWT = Promise.promisifyAll(npmJWT);
 
-const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_SECRET = process.env.JWT_SECRET || 'this is a test secret';
 const HOSTED_URL = process.env.HOSTED_URL;
 
 const ObjectId = mongoose.Schema.Types.ObjectId;

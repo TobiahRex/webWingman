@@ -1,5 +1,10 @@
-const router = require('express').Router();
+import express from 'express';
+import things from './things';
+import users from './users';
 
-router.use('/things', require('./things'));
+const router = new express.Router();
 
-module.exports = router;
+router.use('/things', things);
+router.use('/users', users);
+
+export default router;

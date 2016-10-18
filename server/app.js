@@ -8,12 +8,12 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import favicon from 'serve-favicon';
 import historyApiFallback from 'connect-history-api-fallback';
+import api from './api';
 
 const PORT = process.env.PORT || 3001;
 const MONGO = process.env.MONGODB_URI || 'mongodb://localhost/webWingman';
 const BUILD = process.env.NODE_ENV || 'development';
 const app = express();
-const api = require('./api');
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());

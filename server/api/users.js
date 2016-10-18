@@ -3,9 +3,8 @@ import User from '../models/user';
 // import PhoneToken from 'map this to ../oAuth/Twilio/phone';
 const router = new express.Router();
 
-
 // router.post('/register_phone/:id', (req, res) => PhoneToken.get(req.params.id, res.handle));
-router.post('/register', (req, res) => User.register(req.body, res.handle));
+router.post('/register', (req, res) => User.registerNewUser(req.body, res.handle));
 router.get('/verify/:token', (req, res) => User.emailVerified(req.params.token, res.handle));
 router.post('/login', (req, res) => User.authenticate(req.body, res.handle));
 router.get('/profile', User.authorize(), (req, res) => res.send(req.user));

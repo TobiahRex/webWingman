@@ -1,7 +1,7 @@
 import express from 'express';
 import Thing from '../models/Thing';
 
-const router = express.Router(); //eslint-disable-line
+const router = new express.Router();
 
 router.get('/:thingId', (req, res) => Thing.findById(req.params.thingId, res.handle));
 
@@ -15,4 +15,4 @@ router.route('/')
   .get((req, res) => Thing.find({}, res.handle))
   .post((req, res) => Thing.create(req.body, res.handle));
 
-module.exports = router;
+export default router;
