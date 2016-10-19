@@ -8,7 +8,7 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import favicon from 'serve-favicon';
 import historyApiFallback from 'connect-history-api-fallback';
-import api from './api';
+import api from './api/index';
 
 const PORT = process.env.PORT || 3001;
 const MONGO = process.env.MONGODB_URI || 'mongodb://localhost/webWingman';

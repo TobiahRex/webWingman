@@ -1,16 +1,24 @@
-import sendgrid from 'sendgrid';
+import Sendgrid from 'sendgrid';
+import dotenv from 'dotenv';
 
-export default {
+if (process.env.NODE_ENV === 'development' || 'undefined') dotenv.load();
+
+const sendgridMethods = {
   verify(userInfo, cb) {
     const subject = 'Registration Confirmation for Watchman';
-    const fromEmail = new sendgrid.mail.Email('Registration@Watchman.com');
-    const toEmail = new sendgrid.mail.Email(`${userInfo.Email}`);
-    const content = new sendgrid.mail.Content('text/html',
+
+    const fromEmail = new Sendgrid.mail.Email('Registration@Watchman.com');
+    fromEmail.name = 'Customer Service';
+
+    const toEmail = new Sendgrid.mail.Email(`${userInfo.email}`);
+    toEmail.name = `${userInfo.firstName} ${userInfo.lastName}`;
+
+    const content = new Sendgrid.mail.Content('text/html',
     `<html>
-      <h1>Hi, ${userInfo.Firstname}</h1>
+      <h1>Hi, ${userInfo.firstName}</h1>
       <br>
       <p>
-        Please verify your new account by clicking <a href="${userInfo.profileLink}">HERE</a>
+        Please verify your new account by clicking <a href="${userInfo.verifyLink}">HERE</a>
       </p>
       <br>
       <h2>Thanks!
@@ -19,13 +27,15 @@ export default {
       <br>
       <i>Tobiah Rex</i></h2>
     </html>`);
-    const registerEmail = new sendgrid.mail.Mail(fromEmail, subject, toEmail, content);
-    const sg = sendgrid.SendGrid(process.env.SENDGRID_API_KEY); //eslint-disable-line
+    const registerEmail = new Sendgrid.mail.Mail(fromEmail, subject, toEmail, content);
+    const sg = Sendgrid(process.env.SENDGRID_API_KEY); //eslint-disable-line
     const requestBody = registerEmail.toJSON();
     const httpRequest = sg.emptyRequest();
     httpRequest.method = 'POST';
     httpRequest.path = '/v3/mail/send';
     httpRequest.body = requestBody;
-    sg.API(httpRequest, cb); // eslint-disable-line
+    sg.client.API(httpRequest, cb); // eslint-disable-line
   },
 };
+
+export default sendgridMethods;
