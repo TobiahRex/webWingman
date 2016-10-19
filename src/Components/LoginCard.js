@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { browserHistory } from 'react-router';
 import {
   Card,
   CardText,
@@ -8,7 +9,7 @@ import {
   TextField,
 } from 'material-ui';
 
-const muiCard = ({ title, onInputChange, submitLogin, navigateTo }) => (
+const muiCard = ({ title, onInputChange, submitLogin }) => (
   <Card>
 
     <CardText>
@@ -36,9 +37,8 @@ const muiCard = ({ title, onInputChange, submitLogin, navigateTo }) => (
     </CardText>
     <CardActions>
       <FlatButton
-        id="forgot"
         label="Forgot Password?"
-        onClick={e => navigateTo(e.target.getAttribute('id'))}
+        onClick={() => browserHistory.push('/forgot')}
       />
       <RaisedButton
         label="Login"
@@ -52,7 +52,6 @@ const muiCard = ({ title, onInputChange, submitLogin, navigateTo }) => (
 muiCard.propTypes = {
   title: PropTypes.string,
   onInputChange: PropTypes.func.isRequired,
-  navigateTo: PropTypes.func.isRequired,
   submitLogin: PropTypes.func.isRequired,
 };
 
