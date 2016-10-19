@@ -8,7 +8,7 @@ import {
   TextField,
 } from 'material-ui';
 
-const muiCard = ({ title }) => (
+const muiCard = ({ title, onInputChange, submitLogin }) => (
   <Card>
 
     <CardText>
@@ -16,19 +16,31 @@ const muiCard = ({ title }) => (
     </CardText>
 
     <CardText>
-      <TextField floatingLabelText="Email" />
+      <TextField
+        id="Username"
+        floatingLabelText="Username"
+        hintText="Email or Username"
+        onChange={e =>
+          onInputChange(e.target.value, e.target.getAttribute('id'))
+        }
+      />
       <br />
       <TextField floatingLabelText="Password" />
     </CardText>
     <CardActions>
       <FlatButton label="Forgot Password?" />
-      <RaisedButton label="Login" primary />
+      <RaisedButton
+        label="Login"
+        primary
+        onCLick={submitLogin}
+      />
     </CardActions>
   </Card>
 );
 
 muiCard.propTypes = {
   title: PropTypes.string,
+  login: PropTypes.func.isRequired,
 };
 
 export default muiCard;

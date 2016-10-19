@@ -21,7 +21,8 @@ const RegisterCard = ({ title, onInputChange, submitNewUser }) => (
         floatingLabelText="Email"
         hintText="Email"
         onChange={e =>
-          onInputChange(e.target.value, e.target.getAttribute('id'))}
+          onInputChange(e.target.value, e.target.getAttribute('id'))
+        }
       />
       <br />
       <TextField

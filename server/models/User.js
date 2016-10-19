@@ -41,12 +41,6 @@ const userSchema = new mongoose.Schema({
   settings: { type: ObjectId, ref: 'Settings' },
 });
 
-userSchema.statics.obtainUsers = function (cb) {
-  this.find({}).exec()
-  .then(dbUsers => cb(null, dbUsers))
-  .catch(err => cb(err));
-};
-
 /* ----- User Auth Methods & Statics ----- */
 userSchema.statics.registerNewUser = function (newUser, cb) {
   let dbUserRef;
