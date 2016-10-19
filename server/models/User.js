@@ -84,13 +84,12 @@ userSchema.statics.registerNewUser = function (newUser, cb) {
   .catch(err => cb(err));
 };
 userSchema.statics.authenticate = function ({ username, password }, cb) {
-  // if (!username || !password) return cb({ ERROR: 'Required username || password missing.' });
+  if (!username || !password) return cb({ ERROR: 'Required username || password missing.' });
   let dbUserRef;
   let tokenRef;
   return User.findOne({ username }, 'password')
-  })
   .then((dbUser) => {
-    console.log('dbUser: ', dbUser);
+    console.log('password: ', password);
     dbUserRef = dbUser;
     return BCRYPT.compareAsync(password, dbUser.password);
   })
@@ -108,10 +107,12 @@ userSchema.statics.authenticate = function ({ username, password }, cb) {
 userSchema.statics.authorize = function () { // add role default value to args if needed.
   return (req, res, next) => { // eslint-disable-line
     const tokenHeader = req.headers.authorization;
+    console.log('tokenHeader: ', tokenHeader);
     if (!tokenHeader) return res.status(400).send({ ERROR: 'User note found.' });
 
     const token = tokenHeader.split(' ')[1]; // this will extract JWT from header.
-    JWT.decodeAsync(token, JWT_SECRET)
+    console.log('token: ', token);
+    JWT.decodeAsync(JWT_SECRET, token)
     .then(payload => this.findById(payload._id).select({ password: false }).exec())
     .then((dbUser) => {
       req.user = dbUser;
@@ -146,7 +147,7 @@ userSchema.methods.profileLink = function () {
   return JWT.encodeAsync(JWT_SECRET, payload);
 };
 userSchema.methods.createToken = function () {
-  return JWT.encodeAsync({ _id: this._id }, JWT_SECRET);
+  return JWT.encodeAsync(JWT_SECRET, { _id: this._id });
 };
 
 const User = mongoose.model('User', userSchema);
