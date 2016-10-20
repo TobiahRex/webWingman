@@ -38,11 +38,16 @@ const userSchema = new mongoose.Schema({
     type: String,
   }],
   lastLogin: { type: Date },
+  activeDevice: [
+    {
+      ip: { type: String },
+    },
+  ],
   settings: { type: ObjectId, ref: 'Settings' },
 });
 
 /* ----- User Auth Methods & Statics ----- */
-userSchema.statics.registerNewUser = function (newUser, cb) {
+userSchema.statics.registerNewUser = function (newUser, header, cb) {
   let dbUserRef;
   this.findOne({ email: newUser.email }).exec()
   .then((dbUser) => {
@@ -59,6 +64,7 @@ userSchema.statics.registerNewUser = function (newUser, cb) {
   })
   .then((token) => {
     dbUserRef.registration.verifyLink = `${HOSTED_URL}/api/users/verify/${token}`;
+    dbUserRef.activeDevice.push(header.origin);
     return dbUserRef.save();
   })
   .then(savedUser => Email.verify(savedUser))
