@@ -10,6 +10,7 @@ export default function* login(api, action) {
       put(userActions.userReceived(response.data)),
     put(apiActions.apiSuccess())];
   } else {
-    yield put(apiActions.apiFailure(response.problem));
+    yield [put(loginActions.loginFailure(response.problem)),
+      put(apiActions.apiFailure(response.problem))];
   }
 }
