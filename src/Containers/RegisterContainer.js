@@ -16,7 +16,8 @@ class RegisterContainer extends React.Component {
       lastName: '',
       password: '',
       confirmPassword: '',
-      error: false,
+      error: '',
+      success: '',
     };
     this.RegisterProps = {
       title: 'Register',
@@ -26,13 +27,26 @@ class RegisterContainer extends React.Component {
     this.errorProps = {
       title: 'Password Error',
       open: false,
-      onRequestClose: this.clearError,
+      onRequestClose: () => this.clearDialog('error'),
       modal: true,
       actions: [
         <FlatButton
           primary
           label="OK"
-          onTouchTap={this.clearError}
+          onTouchTap={() => this.clearDialog('error')}
+        />,
+      ],
+    };
+    this.successProps = {
+      title: 'Success!',
+      open: false,
+      onRequestClose: () => this.clearDialog('success'),
+      modal: true,
+      actions: [
+        <FlatButton
+          primary
+          label="OK"
+          onTouchTap={() => this.clearDialog('success')}
         />,
       ],
     };
@@ -59,20 +73,32 @@ class RegisterContainer extends React.Component {
   }
   submitNewUser = () => {
     if (this.state.confirmPassword !== this.state.password) {
-      this.setState({ error: 'Passwords do not match.  Please try again.' });
-      return (this.errorProps.open = true);
+      this.setState({ error: 'Passwords do not match.  Please try again.' },
+      () => (this.errorProps.open = true));
+    } else {
+      const { email, firstName, lastName, password } = this.state;
+      this.successProps.open = true;
+      this.setState({ success: 'You\'ve successfully been registered!\n\nConfirm your registration by clicking on the verification link.' },
+      () => this.props.registerUser({ email, firstName, lastName, password }));
     }
-    return this.props.registerUser(this.state);
   }
-  clearError = () => {
-    this.setState({ error: '' });
-    this.errorProps.open = false;
+  clearDialog = (type) => {
+    if (type === 'error') {
+      this.setState({ error: '' });
+      this.errorProps.open = false;
+    } else {
+      this.setState({ success: '' });
+      this.successProps.open = false;
+    }
   }
   render = () => (
     <div>
       <RegisterCard {...this.RegisterProps} />
       <Dialog {...this.errorProps} >
         {this.state.error}
+      </Dialog>
+      <Dialog {...this.errorProps} >
+        {this.state.success}
       </Dialog>
     </div>
   );
