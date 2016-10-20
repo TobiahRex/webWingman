@@ -17,7 +17,6 @@ export default Creators;
 export const INITIAL_STATE = {
   active: true,
   username: null,
-  error: null,
 };
 
 // ----- Response Actions ----- //
