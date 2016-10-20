@@ -2,8 +2,9 @@ import { createActions, createReducer } from 'reduxsauce';
 
 // ------ Types & Creators ----- //
 const { Types, Creators } = createActions({
-  registerAttempt: null,
-  registerSuccess: null,
+  registerAttempt: ['userObj'],
+  registerSuccess: [null],
+  registerFailure: ['error'],
   loginAttempt: null,
   loginSuccess: ['username'],
   loginFailure: ['error'],
@@ -43,6 +44,11 @@ const loginFailure = ({ error }) => ({
   attempting: false,
 });
 
+const registerFailure = ({ error }) => ({
+  error,
+  attempting: false,
+});
+
 const logout = ({ userID }) => ({
   userID,
   attempting: false,
@@ -53,6 +59,7 @@ const logout = ({ userID }) => ({
 export const authReducer = createReducer(INITIAL_STATE, {
   [Types.REGISTER_ATTEMPT]: registerAttempt,
   [Types.REGISTER_SUCCESS]: registerSuccess,
+  [Types.REGISTER_FAILURE]: registerFailure,
   [Types.LOGIN_ATTEMPT]: loginAttempt,
   [Types.LOGIN_SUCCESS]: loginSuccess,
   [Types.LOGIN_FAILURE]: loginFailure,
