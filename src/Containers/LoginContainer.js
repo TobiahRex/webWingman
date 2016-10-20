@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import LoginCard from '../Components/LoginCard';
 import Actions from '../Redux/AuthRedux';
 
