@@ -9,67 +9,74 @@ import {
   TextField,
 } from 'material-ui';
 
-const RegisterCard = ({ title, onInputChange, submitNewUser }) => (
-  <Card>
-    <CardText>
-      {title || "EMPTY prop"}
-    </CardText>
+const RegisterCard = ({ title, onInputChange, submitNewUser }) => {
+  const PROPS = {
+    required: true,
+    onChange: e => onInputChange(e.target.value, e.target.getAttribute('id')),
+  };
 
-    <CardText>
-      <TextField
-        id="firstName"
-        floatingLabelText="First Name"
-        onChange={e =>
-          onInputChange(e.target.value, e.target.getAttribute('id'))
-        }
-      />
-      <br />
-      <TextField
-        id="lastName"
-        floatingLabelText="Last Name"
-        onChange={e =>
-          onInputChange(e.target.value, e.target.getAttribute('id'))}
-      />
-      <br />
-      <TextField
-        id="registerEmail"
-        floatingLabelText="Email"
-        hintText="Email or Username"
-        onChange={e =>
-          onInputChange(e.target.value, e.target.getAttribute('id'))
-        }
-      />
-      <br />
-      <TextField
-        id="registerPwd"
-        type="password"
-        floatingLabelText="Password"
-        onChange={e =>
-          onInputChange(e.target.value, e.target.getAttribute('id'))}
-      />
-      <br />
-      <TextField
-        id="registerPwdConfirm"
-        type="password"
-        floatingLabelText="Confirm Password"
-        onChange={e =>
-        onInputChange(e.target.value, e.target.getAttribute('id'))}
-      />
-      <br />
-    </CardText>
-    <CardActions>
-      <FlatButton
-        label="Need to Login?"
-        onClick={() => { browserHistory.push('/Login'); }}
-      />
-      <RaisedButton
-        label="Register"
-        secondary
-        onClick={submitNewUser}
-      />
-    </CardActions>
-  </Card>
-);
+  return (
+    <Card>
+      <CardText>
+        {title || "EMPTY prop"}
+      </CardText>
+
+      <CardText>
+        <TextField
+          id="firstName"
+          floatingLabelText="First Name"
+          {...PROPS}
+        />
+        <br />
+        <TextField
+          id="lastName"
+          floatingLabelText="Last Name"
+          {...PROPS}
+        />
+        <br />
+        <TextField
+          id="registerEmail"
+          floatingLabelText="Email"
+          hintText="Email"
+          {...PROPS}
+        />
+        <br />
+        <TextField
+          id="registerUsername"
+          floatingLabelText="Username"
+          hintText="Username"
+          {...PROPS}
+        />
+        <br />
+        <TextField
+          id="registerPwd"
+          type="password"
+          floatingLabelText="Password"
+          {...PROPS}
+        />
+        <br />
+        <TextField
+          id="registerPwdConfirm"
+          type="password"
+          floatingLabelText="Confirm Password"
+          {...PROPS}
+        />
+        <br />
+      </CardText>
+      <CardActions>
+        <FlatButton
+          label="Need to Login?"
+          onClick={() => { browserHistory.push('/Login'); }}
+        />
+        <RaisedButton
+          label="Register"
+          secondary
+          onClick={submitNewUser}
+        />
+      </CardActions>
+    </Card>
+  );
+};
 
 RegisterCard.propTypes = {
   title: PropTypes.string,

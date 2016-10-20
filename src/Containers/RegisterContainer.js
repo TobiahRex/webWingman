@@ -45,6 +45,11 @@ class RegisterContainer extends React.Component {
     }
   }
   submitNewUser = () => {
+    /*
+      Create error check for missing username or email.
+    */
+    this.state.username ?
+
     this.props.registerUser(this.state);
   }
   render = () => {
