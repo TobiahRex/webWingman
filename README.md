@@ -9,6 +9,22 @@ Full-Stack REACT & Redux - Created: 14 October 2016
 ## DESCRIPTION:
 Uses voice to text and text to voice for geolocation chat.
 
+## Boilerplate:
+[React, Redux, Express, Sagas](https://github.com/TobiahRex/reactBoilerplate)
+
+## Technologies:
+  - Redux
+  - Express
+  - Mongo & Mongoose
+    * Database manipulation is 100% promise based.
+      - Uses mongoose & bluebird for Promise library.
+  - Node
+  - Sagas
+  - Material UI
+  - Babel
+  - ESlint (Airbnb Style Guide)
+  - Firebase
+
 ## Setup:
   - `npm install`
   - `npm start` for development server
