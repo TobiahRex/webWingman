@@ -6,7 +6,7 @@ import apiActions from '../../Services/API';
 export default function* (api, action) {
   const response = yield call(() => api.register(action));
   if (response.ok) {
-    yield [put(registerActions.registerSuccess(response.data.ip)),
+    yield [put(registerActions.registerSuccess(response.data.activeDevices)),
     put(userActions.userReceived(response.data)),
     put(apiActions.apiSuccess())];
   } else {

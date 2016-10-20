@@ -38,7 +38,7 @@ const userSchema = new mongoose.Schema({
     type: String,
   }],
   lastLogin: { type: Date },
-  activeDevice: [
+  activeDevices: [
     {
       ip: { type: String },
     },
@@ -64,7 +64,7 @@ userSchema.statics.registerNewUser = function (newUser, header, cb) {
   })
   .then((token) => {
     dbUserRef.registration.verifyLink = `${HOSTED_URL}/api/users/verify/${token}`;
-    dbUserRef.activeDevice.push(header.origin);
+    dbUserRef.activeDevices.push(header.origin);
     return dbUserRef.save();
   })
   .then(savedUser => Email.verify(savedUser))

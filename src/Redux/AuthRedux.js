@@ -2,8 +2,8 @@ import { createActions, createReducer } from 'reduxsauce';
 
 // ------ Types & Creators ----- //
 const { Types, Creators } = createActions({
-  registerUser: ['userObj'],
-  registerSuccess: ['deviceIP'], // the new user info gets sent to the userReducer
+  registerUser: ['userObj'],  // called in the API
+  registerSuccess: ['ips'],   // actual user info is sent to the userReducer (not here)
   registerFailure: ['error'],
   loginSuccess: ['username'],
   loginFailure: ['error'],
@@ -21,25 +21,17 @@ export const INITIAL_STATE = {
 // ----- Response Actions ----- //
 
 // This method tracks the device IP's that the user has registered from.
-const registerSuccess = (state, { activeDevice }) => {
-  const activeIP = state.activeIP;
-  activeIP.push({ activeDevice });
-  return ({
-    activeIP,
-    active: true,
-  });
-};
+const registerSuccess = (state, ips) => ({
+  ips,
+  active: true,
+});
 
 // This method tracks the device IP's that the user is CURRENTLY signed in from.
-const loginSuccess = (state, { username, activeDevice }) => {
-  const activeIP = state.activeIP;
-  activeIP.push({ ip: activeDevice });
-  return ({
-    username,
-    activeIP,
-    active: true,
-  });
-};
+const loginSuccess = (state, { username, ips }) => ({
+  ips,
+  username,
+  active: true,
+});
 
 const loginFailure = ({ error }) => ({
   error,
@@ -49,10 +41,6 @@ const registerFailure = ({ error }) => ({
   error,
 });
 
-const logout = ({ userID }) => ({
-  userID,
-});
-
 
 // ----- create Reducer ----- //
 export const authReducer = createReducer(INITIAL_STATE, {
@@ -60,5 +48,4 @@ export const authReducer = createReducer(INITIAL_STATE, {
   [Types.REGISTER_FAILURE]: registerFailure,
   [Types.LOGIN_SUCCESS]: loginSuccess,
   [Types.LOGIN_FAILURE]: loginFailure,
-  [Types.LOGOUT]: logout,
 });
