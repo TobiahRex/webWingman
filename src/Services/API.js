@@ -8,6 +8,7 @@ const createAPI = (baseURL = 'http://localhost:3001/') => {
       'Cache-Control': 'no-cache',
     },
   });
+
   /* STEP 2: Assign API key to all requests (if desired)
   // ---------- Example: Force OpenWeather API Key on all requests
   api.addRequestTransform((request) => {
@@ -48,6 +49,7 @@ const createAPI = (baseURL = 'http://localhost:3001/') => {
   const register = userObj => api.post('api/users/register', userObj);
   const login = loginObj => api.post('api/users/login', loginObj);
   const logout = () => api.post('api/users/logout');
+  const profile = token => api.get('api/users/profile', { headers: { authorization: `Bearer ${token}` } });
   /* userObj contains...
     - username:
     - password:
@@ -73,6 +75,7 @@ const createAPI = (baseURL = 'http://localhost:3001/') => {
     register,
     login,
     logout,
+    profile,
 
   };
 };

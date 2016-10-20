@@ -101,7 +101,7 @@ userSchema.statics.authenticate = function ({ username, password }, cb) {
 userSchema.statics.authorize = function () { // add role default value to args if needed.
   return (req, res, next) => { // eslint-disable-line
     const tokenHeader = req.headers.authorization;
-    if (!tokenHeader) return res.status(400).send({ ERROR: 'User note found.' });
+    if (!tokenHeader) return res.status(400).send({ ERROR: 'User not found.' });
 
     const token = tokenHeader.split(' ')[1]; // this will extract JWT from header by removing "Bearer" prefix.
     JWT.decodeAsync(JWT_SECRET, token)
