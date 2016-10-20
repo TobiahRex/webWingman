@@ -5,9 +5,11 @@ const { Types, Creators } = createActions({
   registerUser: ['userObj'],  // called in the API
   registerSuccess: ['ips'],   // actual user info is sent to the userReducer (not here)
   registerFailure: ['error'],
+  loginUser: ['userCreds'],
   loginSuccess: ['username'],
   loginFailure: ['error'],
   logout: ['userID'],
+  logoutSuccess: null,
 });
 
 export const AuthTypes = Types;
@@ -41,6 +43,16 @@ const registerFailure = ({ error }) => ({
   error,
 });
 
+const logoutSuccess = () => ({
+  userID: null,
+  username: null,
+  email: null,
+  lastLogin: null,
+  location: null,
+  photoUrl: null,
+  settings: null,
+});
+
 
 // ----- create Reducer ----- //
 export const authReducer = createReducer(INITIAL_STATE, {
@@ -48,4 +60,5 @@ export const authReducer = createReducer(INITIAL_STATE, {
   [Types.REGISTER_FAILURE]: registerFailure,
   [Types.LOGIN_SUCCESS]: loginSuccess,
   [Types.LOGIN_FAILURE]: loginFailure,
+  [Types.LOGOUT_SUCCESS]: logoutSuccess,
 });

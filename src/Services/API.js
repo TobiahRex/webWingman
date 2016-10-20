@@ -47,7 +47,7 @@ const createAPI = (baseURL = 'http://localhost:3001/') => {
   const editThing = thing => api.put(`api/things/${thing._id}`, { name: thing.name });
 
   const register = userObj => api.post('api/users/register', userObj);
-  const login = loginObj => api.post('api/users/login', loginObj);
+  const login = userCreds => api.post('api/users/login', userCreds);
   const logout = () => api.post('api/users/logout');
   const profile = token => api.get('api/users/profile', { headers: { authorization: `Bearer ${token}` } });
   /* userObj contains...
