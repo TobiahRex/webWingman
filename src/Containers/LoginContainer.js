@@ -1,17 +1,32 @@
 import React, { PropTypes } from 'react';
 import LoginCard from '../Components/LoginCard';
+import Actions from '../Redux/AuthRedux';
 
-const Login = ({ login }) => (
-  <div>
-    <LoginCard
-      title="Login"
-      login={login}
-    />
-  </div>
-);
+class Login extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      email: '',
+      password: '',
+    };
+  }
+  render = () => (
+    <div>
+      <LoginCard
+        title="Login"
+        login={this.props.loginUser}
+      />
+    </div>
+  );
+}
 
 Login.propTypes = {
-  login: PropTypes.func.isRequired,
+  loginUser: PropTypes.func.isRequired,
 };
 
-export default Login;
+const mapDispatchToProps = dispatch => ({
+  loginUser: userCreds => dispatch(Actions.loginUser(userCreds)),
+});
+
+export default connect(null, mapDispatchToProps)(Login);
