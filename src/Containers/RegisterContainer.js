@@ -105,7 +105,7 @@ class RegisterContainer extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  registerUser: infoObj => dispatch(Actions.registerUser(infoObj)),
+  registerUser: userObj => dispatch(Actions.registerUser(userObj)),
 });
 
 export default connect(null, mapDispatchToProps)(RegisterContainer);
