@@ -5,6 +5,11 @@ import LoginCard from '../Components/LoginCard';
 import Actions from '../Redux/AuthRedux';
 
 class Login extends React.Component {
+  static propTypes = {
+    loginUser: PropTypes.func.isRequired,
+    apiError: PropTypes.string,
+    apiSuccess: PropTypes.string,
+  }
   constructor(props) {
     super(props);
 
@@ -56,12 +61,6 @@ class Login extends React.Component {
     </div>
   );
 }
-
-Login.propTypes = {
-  loginUser: PropTypes.func.isRequired,
-  apiError: PropTypes.string,
-  apiSuccess: PropTypes.string,
-};
 
 const mapDispatchToProps = dispatch => ({
   loginUser: userCreds => dispatch(Actions.loginUser(userCreds)),

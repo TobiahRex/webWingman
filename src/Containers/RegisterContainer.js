@@ -6,6 +6,8 @@ import Actions from '../Redux/AuthRedux';
 
 class RegisterContainer extends React.Component {
   static propTypes = {
+    apiSuccess: PropTypes.string,
+    apiError: PropTypes.string,
     registerUser: PropTypes.func.isRequired,
   }
   constructor(props) {
@@ -21,7 +23,7 @@ class RegisterContainer extends React.Component {
     };
     this.RegisterProps = {
       title: 'Register',
-      submitNewUser: this.submitNewUser,
+      submitNewUser: () => this.submitNewUser(this.state),
       onInputChange: this.onInputChange,
     };
     this.errorProps = {
@@ -71,16 +73,13 @@ class RegisterContainer extends React.Component {
       default: break;
     }
   }
-  submitNewUser = () => {
+  submitNewUser = ({ email, firstName, lastName, password }) => {
     if (this.state.confirmPassword !== this.state.password) {
-      this.setState({ error: 'Passwords do not match.  Please try again.',
-      success: '' },
+      this.setState({ error: this.props.apiError, success: '' },
       () => (this.errorProps.open = true));
     } else {
-      const { email, firstName, lastName, password } = this.state;
       this.successProps.open = true;
-      this.setState({ error: '',
-      success: 'You\'ve successfully been registered!\n\nConfirm your registration by clicking on the verification link.' },
+      this.setState({ error: '', success: this.props.apiSuccess },
       () => this.props.registerUser({ email, firstName, lastName, password }));
     }
   }

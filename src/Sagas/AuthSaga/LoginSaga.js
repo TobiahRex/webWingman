@@ -8,7 +8,7 @@ export default function* login(api, action) {
   if (response.ok) {
     yield [put(loginActions.loginSuccess(response.data)),
       put(userActions.userReceived(response.data)),
-    put(apiActions.apiSuccess())];
+    put(apiActions.apiSuccess(response.data))];
   } else {
     yield [put(loginActions.loginFailure(response.problem)),
       put(apiActions.apiFailure(response.problem))];
