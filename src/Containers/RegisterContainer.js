@@ -10,6 +10,9 @@ class RegisterContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      email: '',
+      firstName: '',
+      lastName: '',
       username: '',
       password: '',
       confirmPassword: '',
@@ -23,6 +26,12 @@ class RegisterContainer extends React.Component {
   }
   onInputChange = (value, inputId) => {
     switch (inputId) {
+      case "firstName": {
+        this.setState({ firstName: value });
+      } break;
+      case "lastName": {
+        this.setState({ lastName: value });
+      } break;
       case "registerEmail": {
         this.setState({ username: value });
       } break;

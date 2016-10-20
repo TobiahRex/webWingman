@@ -17,9 +17,24 @@ const RegisterCard = ({ title, onInputChange, submitNewUser }) => (
 
     <CardText>
       <TextField
+        id="firstName"
+        floatingLabelText="First Name"
+        onChange={e =>
+          onInputChange(e.target.value, e.target.getAttribute('id'))
+        }
+      />
+      <br />
+      <TextField
+        id="lastName"
+        floatingLabelText="Last Name"
+        onChange={e =>
+          onInputChange(e.target.value, e.target.getAttribute('id'))}
+      />
+      <br />
+      <TextField
         id="registerEmail"
         floatingLabelText="Email"
-        hintText="Email"
+        hintText="Email or Username"
         onChange={e =>
           onInputChange(e.target.value, e.target.getAttribute('id'))
         }
@@ -27,6 +42,7 @@ const RegisterCard = ({ title, onInputChange, submitNewUser }) => (
       <br />
       <TextField
         id="registerPwd"
+        type="password"
         floatingLabelText="Password"
         onChange={e =>
           onInputChange(e.target.value, e.target.getAttribute('id'))}
@@ -34,6 +50,7 @@ const RegisterCard = ({ title, onInputChange, submitNewUser }) => (
       <br />
       <TextField
         id="registerPwdConfirm"
+        type="password"
         floatingLabelText="Confirm Password"
         onChange={e =>
         onInputChange(e.target.value, e.target.getAttribute('id'))}
