@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Dialog, FlatButton } from 'material-ui';
 import LoginCard from '../Components/LoginCard';
 import Actions from '../Redux/AuthRedux';
 
@@ -10,24 +11,53 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
+      error: '',
+      success: '',
     };
+    this.errorProps = {
+      title: 'Login Error',
+      open: false,
+      onRequestClose: () => this.closeDialog('error'),
+      modal: true,
+      actions: [
+        <FlatButton
+          label="OK"
+          primary
+          onTouchTap={() => this.closeDialog('error')}
+        />,
+      ],
+    };
+  }
+  closeDialog = (type) => {
+    if (type === 'error') {
+      this.setState({ success: '', error: this.props.apiError },
+      () => (this.errorProps.open = true));
+    } else {
+      this.setState({ error: '',
+        success: this.props.apiSuccess },
+      () => (this.successProps.open = true));
+    }
   }
   render = () => (
     <div>
-      <LoginCard
-        title="Login"
-        login={this.props.loginUser}
-      />
+      <LoginCard title="Login" login={this.props.loginUser} />
+      <Dialog {...this.errorProps} >{this.state.error}</Dialog>
     </div>
   );
 }
 
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
+  apiError: PropTypes.string,
+  apiSuccess: PropTypes.string,
 };
 
 const mapDispatchToProps = dispatch => ({
   loginUser: userCreds => dispatch(Actions.loginUser(userCreds)),
 });
+const mapStateToProps = state => ({
+  apiError: state.api.error,
+  apiSuccess: state.api.success,
+});
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

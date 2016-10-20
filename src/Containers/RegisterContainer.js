@@ -73,12 +73,14 @@ class RegisterContainer extends React.Component {
   }
   submitNewUser = () => {
     if (this.state.confirmPassword !== this.state.password) {
-      this.setState({ error: 'Passwords do not match.  Please try again.' },
+      this.setState({ error: 'Passwords do not match.  Please try again.',
+      success: '' },
       () => (this.errorProps.open = true));
     } else {
       const { email, firstName, lastName, password } = this.state;
       this.successProps.open = true;
-      this.setState({ success: 'You\'ve successfully been registered!\n\nConfirm your registration by clicking on the verification link.' },
+      this.setState({ error: '',
+      success: 'You\'ve successfully been registered!\n\nConfirm your registration by clicking on the verification link.' },
       () => this.props.registerUser({ email, firstName, lastName, password }));
     }
   }
@@ -107,5 +109,9 @@ class RegisterContainer extends React.Component {
 const mapDispatchToProps = dispatch => ({
   registerUser: userObj => dispatch(Actions.registerUser(userObj)),
 });
+const mapStateToProps = state => ({
+  apiSuccess: state.api.success,
+  apiError: state.api.error,
+});
 
-export default connect(null, mapDispatchToProps)(RegisterContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterContainer);
