@@ -10,10 +10,10 @@ export default class NavBar extends React.Component {
   componentWillMount() {
     const currentUrl = this.props.pathname;
     switch (currentUrl) {
-      case '/Login': {
+      case '/login': {
         this.setState({ title: 'Welcome Back!' });
       } break;
-      case '/Register': {
+      case '/register': {
         this.setState({ title: 'Let\'s Get Started!' });
       } break;
       default: {

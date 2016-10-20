@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Dialog, FlatButton } from 'material-ui';
 import RegisterCard from '../Components/RegisterCard';
 import Actions from '../Redux/AuthRedux';
 
@@ -13,15 +14,27 @@ class RegisterContainer extends React.Component {
       email: '',
       firstName: '',
       lastName: '',
-      username: '',
       password: '',
       confirmPassword: '',
+      error: false,
     };
     this.RegisterProps = {
       title: 'Register',
       submitNewUser: this.submitNewUser,
       onInputChange: this.onInputChange,
-      setRefs: this.setRefs,
+    };
+    this.errorProps = {
+      title: 'Password Error',
+      open: false,
+      onRequestClose: this.resetError,
+      modal: true,
+      actions: [
+        <FlatButton
+          primary
+          label="OK"
+          onTouchTap={this.resetError}
+          />,
+      ],
     };
   }
   onInputChange = (value, inputId) => {
@@ -33,7 +46,7 @@ class RegisterContainer extends React.Component {
         this.setState({ lastName: value });
       } break;
       case "registerEmail": {
-        this.setState({ username: value });
+        this.setState({ email: value });
       } break;
       case "registerPwd": {
         this.setState({ password: value });
@@ -45,18 +58,23 @@ class RegisterContainer extends React.Component {
     }
   }
   submitNewUser = () => {
-    /*
-      Create error check for missing username or email.
-    */
-    this.state.username ?
-
-    this.props.registerUser(this.state);
+    if (this.state.confirmPassword !== this.state.password) {
+      this.setState({ error: 'Password do not match.  Please try again.' });
+      return (this.errorProps.open = true);
+    }
+    return this.props.registerUser(this.state);
+  }
+  resetError = () => {
+    this.setState({ error: '' });
+    this.errorProps.open = false;
   }
   render = () => {
+    console.log('this.errorProps: ', this.errorProps);
     console.log('this.state: ', this.state);
     return (
       <div>
         <RegisterCard {...this.RegisterProps} />
+        <Dialog {...this.errorProps} >{this.state.error}</Dialog>
       </div>
     );
   };

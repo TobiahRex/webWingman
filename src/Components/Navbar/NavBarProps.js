@@ -8,11 +8,11 @@ const NavBarProps = {
     <div>
       <FlatButton
         label="Login"
-        onClick={() => { browserHistory.push('/Login'); }}
+        onClick={() => { browserHistory.push('/login'); }}
       />
       <FlatButton
         label="Register"
-        onClick={() => { browserHistory.push('/Register'); }}
+        onClick={() => { browserHistory.push('/register'); }}
       />
       <FlatButton
         label="Home"

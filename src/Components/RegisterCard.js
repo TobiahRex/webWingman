@@ -37,14 +37,7 @@ const RegisterCard = ({ title, onInputChange, submitNewUser }) => {
         <TextField
           id="registerEmail"
           floatingLabelText="Email"
-          hintText="Email"
-          {...PROPS}
-        />
-        <br />
-        <TextField
-          id="registerUsername"
-          floatingLabelText="Username"
-          hintText="Username"
+          hintText="Email "
           {...PROPS}
         />
         <br />
