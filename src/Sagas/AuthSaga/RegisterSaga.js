@@ -8,7 +8,7 @@ export default function* (api, action) {
   if (response.ok) {
     yield [put(registerActions.registerSuccess(response.data.activeDevices)),
     put(userActions.userReceived(response.data)),
-    put(apiActions.apiSuccess())];
+    put(apiActions.apiSuccess(response.Data))];
   } else {
     yield [put(registerActions.registerFailure(response.problem)),
     put(apiActions.apiFail(response.problem))];

@@ -33,6 +33,16 @@ Uses voice to text and text to voice for geolocation chat.
   NOTE: I Highly recommend running npm update --save to update package json before running "npm start" or "npm build".
 
 ## Updates:
+  - October 20th:
+    * (1. PLAN): Wrap up front end login & logout.
+    * (2. PLAN): Begin audio recording and Bluemix TTS.
+    * (3. PLAN): Save Bluemix results to Users profile in Firebase.
+    
+  - October 19th
+    * Plugged in Login & Register Containers to respective Sagas.
+    * Created Error handling for Login & Register Components, w/msgs from BE API rendering to dialogs in the FE.
+    * Added "activeDevices" to BE schema, and FE store to track logged in devices.
+
   - October 18th, backend manual auth API fully functional.
     * Register new user.
     * Email Register Verification.

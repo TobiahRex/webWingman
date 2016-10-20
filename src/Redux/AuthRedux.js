@@ -2,8 +2,10 @@ import { createActions, createReducer } from 'reduxsauce';
 
 // ------ Types & Creators ----- //
 const { Types, Creators } = createActions({
-  registerUser: ['userObj'],  // called in the API
-  registerSuccess: ['ips'],   // actual user info is sent to the userReducer (not here)
+  // called in the API
+  registerUser: ['userObj'],
+  // actual user info is sent to the userReducer (not here)
+  registerSuccess: ['ips'],
   registerFailure: ['error'],
   loginUser: ['userCreds'],
   loginSuccess: ['username'],
