@@ -45,6 +45,17 @@ const createAPI = (baseURL = 'http://localhost:3001/') => {
   const removeThing = id => api.delete(`api/things/${id}`);
   const editThing = thing => api.put(`api/things/${thing._id}`, { name: thing.name });
 
+  const register = userObj => api.post('api/users/register', userObj);
+  const login = loginObj => api.post('api/users/login', loginObj);
+  const logout = () => api.post('api/users/logout');
+  /* userObj contains...
+    - username:
+    - password:
+    - firstName:
+    - lastName:
+    - email:
+  */
+
   /* STEP 5 Return back an obj of methods...
   These will be considered our "api interface".
   Most of the time it'll be just the list of all the methods in step 4.
@@ -58,6 +69,11 @@ const createAPI = (baseURL = 'http://localhost:3001/') => {
     createThing,
     removeThing,
     editThing,
+
+    register,
+    login,
+    logout,
+
   };
 };
 

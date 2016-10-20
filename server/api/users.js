@@ -8,6 +8,7 @@ router.post('/register', (req, res) => User.registerNewUser(req.body, res.handle
 router.get('/verify/:token', (req, res) => User.emailVerified(req.params.token, res.handle));
 router.post('/login', (req, res) => User.authenticate(req.body, res.handle));
 router.get('/profile', User.authorize(), (req, res) => res.send(req.user));
+router.post('/logout', (req, res) => res.clearCookie('accessToken').status(200).send({ SUCCESS: 'You\'ve been successfully logged out.' }));
 
 router.route('/:id')
 .get((req, res) =>
