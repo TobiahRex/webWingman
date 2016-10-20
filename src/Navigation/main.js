@@ -8,8 +8,8 @@ import Register from '../Containers/RegisterContainer';
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={Things} />
-    <Router path="Login" component={Login} />
-    <Router path="Register" component={Register} />
+    <Router path="login" component={Login} />
+    <Router path="register" component={Register} />
   </Route>
 );
 

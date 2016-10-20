@@ -15,3 +15,16 @@ Uses voice to text and test to voice for chat.
   - `npm build` for production server
 
   NOTE: I Highly recommend running npm update --save to update package json before running "npm start" or "npm build".
+
+## Updates:
+  - October 18th, backend manual auth API fully functional.
+    * Register new user.
+    * Email Register Verification.
+    * Login User.
+    * Get profile with middleware authorization check.
+  - October 16th - 17th:  UI Components completed:
+    * Login
+    * Register
+    * Home
+  - October 14th - 15th: API Saga's Completed.
+    * Crud on backend using SAGAs completed.
