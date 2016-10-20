@@ -7,7 +7,7 @@ Full-Stack REACT & Redux - Created: 14 October 2016
 <!-- ### Deployed on Heroku [here](https://itiner-ez.herokuapp.com/). -->
 
 ## DESCRIPTION:
-Uses voice to text and test to voice for chat.
+Uses voice to text and text to voice for geolocation chat.
 
 ## Setup:
   - `npm install`
