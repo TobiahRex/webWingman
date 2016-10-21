@@ -10,7 +10,7 @@ Full-Stack REACT & Redux - Created: 14 October 2016
 Uses STT -> TTS for geolocation chat.  Mobile Web App.
 
 ## Boilerplate:
-[_reactBoilerplate_ (my own)](https://github.com/TobiahRex/reactBoilerplate)
+["_reactBoilerplate_" (my own)](https://github.com/TobiahRex/reactBoilerplate)
 
 ## Technologies:
   - Redux
