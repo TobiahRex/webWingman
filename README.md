@@ -16,13 +16,15 @@ Uses STT -> TTS for geolocation chat.  Mobile Web App.
   - Redux
   - Express
   - Mongo & Mongoose
-    * Database manipulation is 100% promise based.
-      - Uses mongoose & bluebird for Promise library.
+    * Database manipulation is 100% promise based. Uses mongoose & bluebird for Promise library.
   - Node
   - Sagas
   - Material UI
   - Babel
   - ESlint (Airbnb Style Guide)
+    * `"parser": "babel-eslint",
+    "plugins": ["react", "es2015", "stage-2"]`
+    * configured for class-properties.
   - Firebase
 
 ## Setup:
