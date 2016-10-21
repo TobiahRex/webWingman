@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextField } from 'material-ui';
 
-export const FirstName = props => (
+export const firstName = props => (
   <TextField
     id="firstName"
     floatingLabelText="First Name"
@@ -9,7 +9,7 @@ export const FirstName = props => (
   />
 );
 
-export const LastName = props => (
+export const lastName = props => (
   <TextField
     id="lastName"
     floatingLabelText="Last Name"
@@ -17,16 +17,16 @@ export const LastName = props => (
   />
 );
 
-export const Email = props => (
+export const email = props => (
   <TextField
     id="registerEmail"
     floatingLabelText="Email"
-    hintText="Email "
+    hintText="Email"
     {...props}
   />
 );
 
-export const Password = props => (
+export const password = props => (
   <TextField
     id="registerPwd"
     type="password"
@@ -35,7 +35,7 @@ export const Password = props => (
   />
 );
 
-export const ConfirmPassword = props => (
+export const confirmPassword = props => (
   <TextField
     id="registerPwdConfirm"
     type="password"
@@ -43,3 +43,10 @@ export const ConfirmPassword = props => (
     {...props}
   />
 );
+
+/* Received Props
+  const props = {
+    required: true,
+    onChange: e => onInputChange(e.target.value, e.target.getAttribute('id')),
+  };
+*/
