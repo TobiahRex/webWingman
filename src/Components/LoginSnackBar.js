@@ -5,13 +5,28 @@ This Component relies on a piece of state passed down in props.
 Should contain, an error, success, & fetching boolean.
 */
 export default class muiToast extends React.Component {
+  static propTypes = {
+    apiStatus: {
+      error: PropTypes.string,
+      fetching: PropTypes.string,
+    },
+  };
+
   constructor(props) {
     super(props);
+
     this.state = {
       show: false,
       message: '',
       error: null,
       fetching: null,
+    };
+
+    this.PROPS = {
+      open: this.state.show,
+      message: this.state.message,
+      autoHideDuration: 2000,
+      onRequestClose: () => this.setState({ show: false }),
     };
   }
 
@@ -51,20 +66,10 @@ export default class muiToast extends React.Component {
   }
 
   render() {
-    const PROPS = {
-      open: this.state.show,
-      message: this.state.message,
-      autoHideDuration: 2000,
-      onRequestClose: () => this.setState({ show: false }),
-    };
     return (
       <div>
-        <Snackbar {...PROPS} />
+        <Snackbar {...this.PROPS} />
       </div>
     );
   }
 }
-
-muiToast.propTypes = {
-  apiStatus: PropTypes.object, // eslint-disable-line
-};

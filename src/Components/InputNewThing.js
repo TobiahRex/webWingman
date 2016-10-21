@@ -3,39 +3,20 @@ import { TextField, RaisedButton } from 'material-ui';
 import styles from './Styles/InputStyles';
 
 export default class InputNewThing extends Component {
+  // --- Statics --- //
+  static propTypes = {
+    fetching: PropTypes.func.isRequired,
+    createThing: PropTypes.func.isRequired,
+  };
+  // --- Constructor --- //
   constructor(props) {
     super(props);
-    // --- State --- //
+    // --- State
     this.state = {
       newData: '',
     };
-
-    // --- Bindings --- //
-    this.submitNewThing = this.submitNewThing.bind(this);
-    this.onInputChange = this.onInputChange.bind(this);
-    this.clearInput = this.clearInput.bind(this);
-  }
-
-  // ------------ staticMethods ------------ //
-  onInputChange(e) {
-    this.setState({ newData: e.target.value });
-  }
-
-  submitNewThing(e) {
-    e.preventDefault();
-    this.setState({ newData: '' });
-    this.props.fetching();
-    this.props.createThing({ name: this.state.newData });
-  }
-
-  clearInput() {
-    this.setState({ newData: '' });
-  }
-
-  // ------------ lifeCycle ------------ //
-
-  render() {
-    const PROPS = {
+    // --- JSX prop
+    this.PROPS = {
       form: {
         onSubmit: this.submitNewThing,
       },
@@ -62,17 +43,37 @@ export default class InputNewThing extends Component {
       },
     };
 
+    // --- Bindings
+    this.submitNewThing = this.submitNewThing.bind(this);
+    this.onInputChange = this.onInputChange.bind(this);
+    this.clearInput = this.clearInput.bind(this);
+  }
+
+  // ------------ Static Methods ------------
+  onInputChange(e) {
+    this.setState({ newData: e.target.value });
+  }
+
+  submitNewThing(e) {
+    e.preventDefault();
+    this.setState({ newData: '' });
+    this.props.fetching();
+    this.props.createThing({ name: this.state.newData });
+  }
+
+  clearInput() {
+    this.setState({ newData: '' });
+  }
+
+  // ------------ lifeCycle ------------
+
+  render() {
     return (<div>
-      <form {...PROPS.form}>
-        <TextField {...PROPS.tf} />
-        <RaisedButton {...PROPS.rb1} />
-        <RaisedButton {...PROPS.rb2} />
+      <form {...this.PROPS.form}>
+        <TextField {...this.PROPS.tf} />
+        <RaisedButton {...this.PROPS.rb1} />
+        <RaisedButton {...this.PROPS.rb2} />
       </form>
     </div>);
   }
 }
-
-InputNewThing.propTypes = {
-  fetching: PropTypes.func.isRequired,
-  createThing: PropTypes.func.isRequired
-};

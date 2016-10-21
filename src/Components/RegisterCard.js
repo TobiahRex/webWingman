@@ -17,10 +17,7 @@ const RegisterCard = ({ title, onInputChange, submitNewUser }) => {
 
   return (
     <Card>
-      <CardText>
-        {title || "EMPTY prop"}
-      </CardText>
-
+      <CardText> {title || "EMPTY prop"} </CardText>
       <CardText>
         <TextField
           id="firstName"
@@ -59,7 +56,7 @@ const RegisterCard = ({ title, onInputChange, submitNewUser }) => {
       <CardActions>
         <FlatButton
           label="Need to Login?"
-          onClick={() => { browserHistory.push('/Login'); }}
+          onClick={() => (browserHistory.push('/Login'))}
         />
         <RaisedButton
           label="Register"

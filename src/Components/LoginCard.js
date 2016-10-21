@@ -9,9 +9,8 @@ import {
   TextField,
 } from 'material-ui';
 
-const muiCard = ({ title, onInputChange, submitLogin }) => (
+const LoginCard = ({ title, onInputChange, submitLogin }) => (
   <Card>
-
     <CardText>
       Props: { title || "'empty'" }
     </CardText>
@@ -49,10 +48,10 @@ const muiCard = ({ title, onInputChange, submitLogin }) => (
   </Card>
 );
 
-muiCard.propTypes = {
+LoginCard.propTypes = {
   title: PropTypes.string,
   onInputChange: PropTypes.func.isRequired,
   submitLogin: PropTypes.func.isRequired,
 };
 
-export default muiCard;
+export default LoginCard;
