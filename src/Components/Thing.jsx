@@ -3,9 +3,15 @@ import uuid from 'uuid';
 import { TextField, RaisedButton } from 'material-ui';
 // import SnackBar from 'material-ui';
 import styles from './Styles/ThingStyles';
-import SnackBar from './ApiSnackBar';
 
 export default class Thing extends Component {
+  static propTypes = {
+    fetching: PropTypes.func.isRequired,
+    data: PropTypes.object, //eslint-disable-line
+    editThing: PropTypes.func.isRequired,
+    removeThing: PropTypes.func.isRequired,
+    apiStatus: PropTypes.object, //eslint-disable-line
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -107,11 +113,3 @@ export default class Thing extends Component {
     );
   }
 }
-
-Thing.propTypes = {
-  fetching: PropTypes.func.isRequired,
-  data: PropTypes.object, //eslint-disable-line
-  editThing: PropTypes.func.isRequired,
-  removeThing: PropTypes.func.isRequired,
-  apiStatus: PropTypes.object,
-};

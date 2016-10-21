@@ -44,7 +44,8 @@
     # react specific
     "react/display-name": 1,
     "react/jsx-boolean-value": 1,
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-indent": [2, 2],
+    "react/jsx-filename-extension": [1, { "extensions": [".jsx"] }],
     # eslint-plugin-babel rules
     "babel/generator-star-spacing": 0,
     "babel/new-cap": 1,
