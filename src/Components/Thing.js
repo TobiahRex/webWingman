@@ -7,26 +7,24 @@ import styles from './Styles/ThingStyles';
 export default class Thing extends Component {
   static propTypes = {
     fetching: PropTypes.func.isRequired,
-    data: PropTypes.object, //eslint-disable-line
+    data: {
+      name: PropTypes.string,
+      _id: PropTypes.string,
+    },
     editThing: PropTypes.func.isRequired,
     removeThing: PropTypes.func.isRequired,
-    apiStatus: PropTypes.object, //eslint-disable-line
   };
+
   constructor(props) {
     super(props);
     this.state = {
       data: this.props.data,
       newName: this.props.data.name,
       edit: false,
-      apiSuccess: this.props.apiStatus.success || false,
     };
-
-    this.submitEdit = this.submitEdit.bind(this);
-    this.submitGroup = this.submitGroup.bind(this);
-    this.editGroup = this.editGroup.bind(this);
   }
 
-  submitEdit() {
+  submitEdit = () => {
     const newThing = this.state.data;
     newThing.name = this.state.newName;
 
@@ -35,7 +33,7 @@ export default class Thing extends Component {
     this.setState({ newName: '', data: {} });
   }
 
-  submitGroup() {
+  submitGroup = () => {
     const PROPS = {
       tf: {
         id: uuid(),
@@ -60,7 +58,6 @@ export default class Thing extends Component {
         secondary: true,
       },
     };
-
     return (
       <div>
         <TextField {...PROPS.tf} />
@@ -70,7 +67,7 @@ export default class Thing extends Component {
     );
   }
 
-  editGroup() {
+  editGroup = () => {
     const PROPS = {
       tf: {
         id: uuid(),
@@ -95,7 +92,6 @@ export default class Thing extends Component {
         secondary: true,
       },
     };
-
     return (
       <div>
         <TextField {...PROPS.tf} />

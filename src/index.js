@@ -14,8 +14,7 @@ const store = createStore();
 render(
   <Provider store={store} >
     <Router history={browserHistory} routes={routes} />
-  </Provider >
-  ,
+    </Provider >, //eslint-disable-line
   document.getElementById('app')
 );
 

@@ -6,57 +6,33 @@ import {
   CardActions,
   RaisedButton,
   FlatButton,
-  TextField,
 } from 'material-ui';
+import * as Input from './TextInput/TextField.templates';
 
 const RegisterCard = ({ title, onInputChange, submitNewUser }) => {
-  const PROPS = {
+  const props = {
     required: true,
     onChange: e => onInputChange(e.target.value, e.target.getAttribute('id')),
   };
-
   return (
     <Card>
       <CardText> {title || "EMPTY prop"} </CardText>
       <CardText>
-        <TextField
-          id="firstName"
-          floatingLabelText="First Name"
-          {...PROPS}
-        />
+        <Input.firstName {...props} />
         <br />
-        <TextField
-          id="lastName"
-          floatingLabelText="Last Name"
-          {...PROPS}
-        />
+        <Input.lastName {...props} />
         <br />
-        <TextField
-          id="registerEmail"
-          floatingLabelText="Email"
-          hintText="Email "
-          {...PROPS}
-        />
+        <Input.email {...props} />
         <br />
-        <TextField
-          id="registerPwd"
-          type="password"
-          floatingLabelText="Password"
-          {...PROPS}
-        />
+        <Input.password {...props} />
         <br />
-        <TextField
-          id="registerPwdConfirm"
-          type="password"
-          floatingLabelText="Confirm Password"
-          {...PROPS}
-        />
+        <Input.confirmPassword {...props} />
         <br />
       </CardText>
       <CardActions>
         <FlatButton
           label="Need to Login?"
-          onClick={() => (browserHistory.push('/Login'))}
+          onClick={() => browserHistory.push('/Login')}
         />
         <RaisedButton
           label="Register"

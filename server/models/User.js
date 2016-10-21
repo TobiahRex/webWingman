@@ -87,9 +87,8 @@ userSchema.statics.authenticate = function ({ username, password }, cb) {
   if (!username || !password) return cb({ ERROR: 'Required username || password missing.' });
   let dbUserRef;
   let tokenRef;
-  return User.findOne({ username }, 'password')
+  return this.findOne({ username }, 'password')
   .then((dbUser) => {
-    console.log('password: ', password);
     dbUserRef = dbUser;
     return BCRYPT.compareAsync(password, dbUser.password);
   })

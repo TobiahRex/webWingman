@@ -28,8 +28,11 @@ ThingList.propTypes = {
   fetching: PropTypes.func.isRequired,
   removeThing: PropTypes.func.isRequired,
   editThing: PropTypes.func.isRequired,
-  things: PropTypes.array,
-  apiStatus: PropTypes.object,
+  things: PropTypes.array, // eslint-disable-line
+  apiStatus: {
+    error: PropTypes.string,
+    fetching: PropTypes.string,
+  },
 };
 
 export default ThingList;
