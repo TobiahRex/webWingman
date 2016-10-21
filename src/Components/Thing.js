@@ -1,8 +1,7 @@
 import React, { PropTypes, Component } from 'react';
-import uuid from 'uuid';
-import { TextField, RaisedButton } from 'material-ui';
 // import SnackBar from 'material-ui';
-import styles from './Styles/ThingStyles';
+import ShowGroup from './Crud/show/showGroup.template';
+import EditGroup from './Crud/edit/editGroup.template';
 
 export default class Thing extends Component {
   static propTypes = {
@@ -33,78 +32,32 @@ export default class Thing extends Component {
     this.setState({ newName: '', data: {} });
   }
 
-  submitGroup = () => {
-    const PROPS = {
-      tf: {
-        id: uuid(),
-        onChange: e => this.setState({ newName: e.target.value }),
-        value: this.state.newName,
-      },
-      rb1: {
-        onClick: this.submitEdit,
-        type: "submit",
-        label: "Submit",
-        style: styles.lftMargin,
-        primary: true,
-      },
-      rb2: {
-        onClick: () => this.setState({
-          edit: false,
-          data: this.props.data,
-        }),
-        type: "button",
-        label: "Cancel",
-        style: styles.btnMargin,
-        secondary: true,
-      },
-    };
-    return (
-      <div>
-        <TextField {...PROPS.tf} />
-        <RaisedButton {...PROPS.rb1} />
-        <RaisedButton {...PROPS.rb2} />
-      </div>
-    );
+  updateState = (id, value) => {
+    switch (id) {
+      case 'edit': this.setState({ edit: value }); break;
+      case 'newName': this.setState({ edit: value }); break;
+      case 'submit': this.setState({ value, edit: false }); break;
+      case 'cancel': this.setState({ edit: false, data: this.props.data }); break;
+      default: break;
+    }
   }
-
-  editGroup = () => {
-    const PROPS = {
-      tf: {
-        id: uuid(),
-        value: this.state.data.name,
-        disabled: true,
-      },
-      rb1: {
-        onClick: () => this.setState({ edit: true }),
-        type: "button",
-        label: "Edit",
-        style: styles.lftMargin,
-        primary: true,
-      },
-      rb2: {
-        onClick: () => {
-          this.props.fetching();
-          this.props.removeThing(this.props.data._id);
-        },
-        type: "button",
-        label: "Remove",
-        style: styles.btnMargin,
-        secondary: true,
-      },
-    };
-    return (
-      <div>
-        <TextField {...PROPS.tf} />
-        <RaisedButton {...PROPS.rb1} />
-        <RaisedButton {...PROPS.rb2} />
-      </div>
-    );
-  }
-
   render() {
+    const PROPS = {
+      edit: {
+        submit: this.submitEdit,
+        updateState: this.udpateState,
+      },
+      show: {
+        updateState: this.udpateState,
+        removeThing: this.props.removeThing,
+        fetching: this.props.fetching,
+      },
+    };
     return (
       <div>
-        {this.state.edit ? this.submitGroup() : this.editGroup()}
+        {this.state.edit ?
+          <EditGroup {...PROPS.edit} /> : <ShowGroup {...PROPS.show} />
+        }
       </div>
     );
   }

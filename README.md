@@ -33,11 +33,20 @@ Uses voice to text and text to voice for geolocation chat.
   NOTE: I Highly recommend running npm update --save to update package json before running "npm start" or "npm build".
 
 ## Updates:
-  - October 20th:
+  - October 21st-23rd:
     * (1. PLAN): Wrap up front end login & logout.
     * (2. PLAN): Begin audio recording and Bluemix TTS.
     * (3. PLAN): Save Bluemix results to Users profile in Firebase.
-    
+
+  - October 20th:
+    * Refactored All Components into re-usable components.
+      - LoginCard: modified
+      - RegisterCard: modified
+      - TextField template: created
+      - Thing.js: modified/modularized
+      - editGroup: created
+      - submitGroup: created
+
   - October 19th
     * Plugged in Login & Register Containers to respective Sagas.
     * Created Error handling for Login & Register Components, w/msgs from BE API rendering to dialogs in the FE.
@@ -48,9 +57,11 @@ Uses voice to text and text to voice for geolocation chat.
     * Email Register Verification.
     * Login User.
     * Get profile with middleware authorization check.
+
   - October 16th - 17th:  UI Components completed:
     * Login
     * Register
     * Home
+
   - October 14th - 15th: API Saga's Completed.
     * Crud on backend using SAGAs completed.
