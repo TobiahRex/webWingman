@@ -7,10 +7,10 @@ Full-Stack REACT & Redux - Created: 14 October 2016
 <!-- ### Deployed on Heroku [here](https://itiner-ez.herokuapp.com/). -->
 
 ## DESCRIPTION:
-Uses voice to text and text to voice for geolocation chat.
+Uses STT -> TTS for geolocation chat.  Mobile Web App.
 
 ## Boilerplate:
-[React, Redux, Express, Sagas](https://github.com/TobiahRex/reactBoilerplate)
+[_reactBoilerplate_ (my own)](https://github.com/TobiahRex/reactBoilerplate)
 
 ## Technologies:
   - Redux
@@ -39,7 +39,7 @@ Uses voice to text and text to voice for geolocation chat.
     * (3. PLAN): Save Bluemix results to Users profile in Firebase.
 
   - October 20th:
-    * Refactored All Components into re-usable components.
+    * Refactored list of comps into re-usable comps. Modularized smart comps.
       - LoginCard: modified
       - RegisterCard: modified
       - TextField template: created
