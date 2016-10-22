@@ -3,8 +3,8 @@ import { createActions, createReducer } from 'reduxsauce';
 // ------- Types & Creators ------- //
 const { Types, Creators } = createActions({
   fetching: null,
-  apiFail: ['error'],
-  apiSuccess: null,
+  apiFail: ['ERROR'],
+  apiSuccess: ['SUCCESS'],
 });
 
 export const ApiTypes = Types;

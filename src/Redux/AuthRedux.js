@@ -24,7 +24,7 @@ export const INITIAL_STATE = {
 // ----- Response Actions ----- //
 
 // This method tracks the device IP's that the user has registered from.
-const registerSuccess = (state, ips) => ({
+const registerSuccess = (state, { ips }) => ({
   ips,
   active: true,
 });

@@ -1,7 +1,7 @@
 import { createActions, createReducer } from 'reduxsauce';
 
 export const { Types, Creators } = createActions({
-  userReceived: ['userObj'],
+  userReceived: ['user'],
   userSettingsReceived: ['settings'],
 });
 export const userTypes = Types;
@@ -10,25 +10,37 @@ export default Creators;
 // ----- Initial State ----- //
 export const INITIAL_STATE = {
   _id: null,
+  firstName: null,
+  lastName: null,
   email: null,
   lastLogin: null,
   location: null,
   photoUrl: null,
+  verified: null,
   settings: null,
 };
 
 // ----- Creators ----- //
 
-const received = ({ _id, email, lastLogin, location, photoUrl, settings }) => ({
-  _id,
-  email,
-  lastLogin,
-  location,
-  photoUrl,
-  settings,
-});
+const received = (state, { user }) => {
+  console.log('user: ', user);
 
-const changedSettings = ({ settings }) => ({
+  const userObj = {
+    _id: user._id,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email,
+    lastLogin: user.lastLogin,
+    location: user.location,
+    photoUrl: user.photoUrl,
+    verified: user.registration.verified,
+    settings: user.settings,
+  };
+
+  return ({ user: userObj });
+};
+
+const changedSettings = (state, { settings }) => ({
   settings,
 });
 
