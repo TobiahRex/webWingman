@@ -37,7 +37,7 @@ Things.propTypes = {
   editThing: PropTypes.func.isRequired,
   removeThing: PropTypes.func.isRequired,
   things: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.sring,
+    name: PropTypes.sring, //eslint-disable-line
   })),
   apiStatus: {
     error: PropTypes.string.isRequired,

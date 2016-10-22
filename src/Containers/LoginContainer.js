@@ -10,6 +10,7 @@ class Login extends React.Component {
     apiError: PropTypes.string,
     apiSuccess: PropTypes.string,
   }
+
   constructor(props) {
     super(props);
 
@@ -37,27 +38,33 @@ class Login extends React.Component {
       ],
     };
   }
+
   submitLogin = () => {
     const { email, password } = this.state;
     this.setState({ email: '', password: '' },
     () => this.props.loginUser(email, password));
   }
+
   closeDialog = (type) => {
     if (type === 'error') {
-      this.setState({ success: '', error: this.props.apiError },
+      this.setState({
+        success: '',
+        error: this.props.apiError,
+      },
       () => (this.errorProps.open = true));
     } else {
-      this.setState({ error: '',
-        success: this.props.apiSuccess },
+      this.setState({
+        error: '',
+        success: this.props.apiSuccess,
+      },
       () => (this.successProps.open = true));
     }
   }
+
   render = () => (
     <div>
       <LoginCard {...this.LoginProps} />
-      <Dialog {...this.errorProps} >
-        {this.state.error}
-      </Dialog>
+      <Dialog {...this.errorProps} > {this.state.error} </Dialog>
     </div>
   );
 }
