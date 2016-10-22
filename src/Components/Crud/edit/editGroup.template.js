@@ -7,7 +7,7 @@ const editGroup = (props) => {
   const jsxProps = {
     tf: {
       id: uuid(),
-      onChange: e => props.updateState({ newName: e.target.value }),
+      onChange: e => props.updateState('newName', e.target.value),
       value: this.state.newName,
     },
     rb1: {
@@ -18,7 +18,7 @@ const editGroup = (props) => {
       primary: true,
     },
     rb2: {
-      onClick: () => props.updateState(false),
+      onClick: () => props.updateState('cancel'),
       type: "button",
       label: "Cancel",
       style: styles.btnMargin,

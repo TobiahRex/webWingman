@@ -35,12 +35,13 @@ export default class Thing extends Component {
   updateState = (id, value) => {
     switch (id) {
       case 'edit': this.setState({ edit: value }); break;
-      case 'newName': this.setState({ edit: value }); break;
-      case 'submit': this.setState({ value, edit: false }); break;
+      case 'newName': this.setState({ newName: value }); break;
+      case 'submit': this.setState({ edit: false, value }); break;
       case 'cancel': this.setState({ edit: false, data: this.props.data }); break;
       default: break;
     }
   }
+
   render() {
     const PROPS = {
       edit: {
