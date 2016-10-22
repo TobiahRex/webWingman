@@ -74,14 +74,11 @@ class RegisterContainer extends React.Component {
       () => this.props.registerUser({ email, firstName, lastName, password }));
     }
   }
+
   clearDialog = (type) => {
-    if (type === 'error') {
-      this.setState({ error: '' });
-      this.jsxProps.error.open = false;
-    } else {
-      this.setState({ success: '' });
-      this.jsxProps.success.open = false;
-    }
+    if (type === 'error') this.jsxProps.error.open = false;
+    this.jsxProps.success.open = false;
+    this.setState({ [type]: '' });
   }
   render = () => (
     <div>
