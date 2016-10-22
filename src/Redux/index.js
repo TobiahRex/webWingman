@@ -12,11 +12,11 @@ import { authReducer as auth } from '../Redux/AuthRedux';
 
 export default () => {
   const rootReducer = combineReducers({
+    api,
+    auth,
     user,
     activeUsers,
     things,
-    api,
-    auth,
   });
   return configureStore(rootReducer, rootSaga);
 };

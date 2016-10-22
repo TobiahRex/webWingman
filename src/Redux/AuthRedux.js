@@ -17,8 +17,9 @@ const { Types, Creators } = createActions({
 export const AuthTypes = Types;
 export default Creators;
 export const INITIAL_STATE = {
-  active: true,
-  username: null,
+  ips: null,
+  active: false,
+  error: null,
 };
 
 // ----- Response Actions ----- //
@@ -30,36 +31,27 @@ const registerSuccess = (state, { ips }) => ({
 });
 
 // This method tracks the device IP's that the user is CURRENTLY signed in from.
-const loginSuccess = (state, { username, ips }) => ({
+const loginSuccess = (state, { ips }) => ({
   ips,
-  username,
   active: true,
 });
 
-const loginFailure = ({ error }) => ({
-  error,
-});
-
-const registerFailure = ({ error }) => ({
-  error,
-});
-
 const logoutSuccess = () => ({
-  userID: null,
-  username: null,
-  email: null,
-  lastLogin: null,
-  location: null,
-  photoUrl: null,
-  settings: null,
+  ips: null,
+  active: false,
+  error: null,
 });
+
+const loginFailure = ({ error }) => ({ error });
+
+const registerFailure = ({ error }) => ({ error });
 
 
 // ----- create Reducer ----- //
 export const authReducer = createReducer(INITIAL_STATE, {
   [Types.REGISTER_SUCCESS]: registerSuccess,
-  [Types.REGISTER_FAILURE]: registerFailure,
   [Types.LOGIN_SUCCESS]: loginSuccess,
-  [Types.LOGIN_FAILURE]: loginFailure,
   [Types.LOGOUT_SUCCESS]: logoutSuccess,
+  [Types.LOGIN_FAILURE]: loginFailure,
+  [Types.REGISTER_FAILURE]: registerFailure,
 });

@@ -3,8 +3,8 @@ import { createActions, createReducer } from 'reduxsauce';
 // ------- Types & Creators ------- //
 const { Types, Creators } = createActions({
   fetching: null,
-  apiFail: ['ERROR'],
-  apiSuccess: ['SUCCESS'],
+  apiFail: ['error'],
+  apiSuccess: null,
 });
 
 export const ApiTypes = Types;
@@ -16,20 +16,22 @@ export const INITIAL_STATE = {
   count: 0,
   error: false,
   success: false,
+  message: '',
 };
 
 // ------- Response Actions ------- //
-const success = (state, { SUCCESS }) => ({
+const success = state => ({
   fetching: false,
   count: state.fetching - 1,
   error: false,
-  success: SUCCESS,
+  success: true,
 });
 
-const fail = (state, { ERROR }) => ({
+const fail = (state, { error }) => ({
   fetching: false,
   count: state.fetching - 1,
-  ERROR,
+  success: false,
+  error,
 });
 
 const fetching = state => ({
