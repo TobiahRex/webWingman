@@ -1,52 +1,53 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { TextField } from 'material-ui';
 
-export const firstName = props => (
+export const firstName = ({ onChange }) => (
   <TextField
-    id="firstName"
     floatingLabelText="First Name"
-    {...props}
+    onChange={e => onChange(e.target.value, 'firstName')}
+    required
   />
 );
 
-export const lastName = props => (
+export const lastName = ({ onChange }) => (
   <TextField
-    id="lastName"
     floatingLabelText="Last Name"
-    {...props}
+    onChange={e => onChange(e.target.value, 'lastName')}
   />
 );
 
-export const email = props => (
+export const email = ({ onChange }) => (
   <TextField
-    id="registerEmail"
     floatingLabelText="Email"
     hintText="Email"
-    {...props}
+    onChange={e => onChange(e.target.value, 'email')}
   />
 );
 
-export const password = props => (
+export const password = ({ onChange }) => (
   <TextField
-    id="registerPwd"
-    type="password"
-    floatingLabelText="Password"
-    {...props}
-  />
-);
-
-export const confirmPassword = props => (
-  <TextField
-    id="registerPwdConfirm"
     type="password"
     floatingLabelText="Confirm Password"
-    {...props}
+    onChange={e => onChange(e.target.value, 'password')}
   />
 );
 
+firstName.propTypes = {
+  onChange: PropTypes.func.isRequired,
+};
+lastName.propTypes = {
+  onChange: PropTypes.func.isRequired,
+};
+email.propTypes = {
+  onChange: PropTypes.func.isRequired,
+};
+password.propTypes = {
+  onChange: PropTypes.func.isRequired,
+};
+
 /* Received Props
-  const props = {
-    required: true,
-    onChange: e => onInputChange(e.target.value, e.target.getAttribute('id')),
-  };
+const props = {
+required: true,
+onChange: e => onInputChange(e.target.value, e.target.getAttribute('id')),
+};
 */

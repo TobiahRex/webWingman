@@ -11,8 +11,7 @@ import * as Input from './TextInput/TextField.templates';
 
 const RegisterCard = ({ title, onInputChange, submitNewUser }) => {
   const props = {
-    required: true,
-    onChange: e => onInputChange(e.target.value, e.target.getAttribute('id')),
+    onChange: onInputChange,
   };
   return (
     <Card>

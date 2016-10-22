@@ -17,21 +17,16 @@ const LoginCard = ({ title, onInputChange, submitLogin }) => (
 
     <CardText>
       <TextField
-        id="Username"
-        floatingLabelText="Username"
-        hintText="Email or Username"
-        onChange={e =>
-          onInputChange(e.target.value, e.target.getAttribute('id'))
-        }
+        id="Email"
+        floatingLabelText="Email"
+        onChange={e => onInputChange(e.target.value, 'email')}
       />
       <br />
       <TextField
         id="password"
         floatingLabelText="Password"
         type="password"
-        onChange={e =>
-          onInputChange(e.target.value, e.target.getAttribute('id'))
-        }
+        onChange={e => onInputChange(e.target.value, 'password')}
       />
     </CardText>
     <CardActions>
