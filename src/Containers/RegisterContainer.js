@@ -80,15 +80,12 @@ class RegisterContainer extends React.Component {
     this.jsxProps.success.open = false;
     this.setState({ [type]: '' });
   }
+
   render = () => (
     <div>
       <RegisterCard {...this.RegisterProps} />
-      <Dialog {...this.jsxProps.error} >
-        {this.state.error}
-      </Dialog>
-      <Dialog {...this.jsxProps.error} >
-        {this.state.success}
-      </Dialog>
+      <Dialog {...this.jsxProps.error} > {this.state.error} </Dialog>
+      <Dialog {...this.jsxProps.error} > {this.state.success} </Dialog>
     </div>
   );
 }
