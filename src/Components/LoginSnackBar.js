@@ -38,10 +38,8 @@ export default class muiToast extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const error = this.state.error;
-    const fetching = this.state.fetching;
-    const apiError = nextProps.apiStatus.error;
-    const apiFetching = nextProps.apiStatus.fetching;
+    const { error, fetching } = this.state;
+    const { apiError, apiFetching } = nextProps.apiStatus.error;
 
     if (!error && fetching && !apiError && !apiFetching) {
       // If fetching was successfully completed
@@ -65,11 +63,9 @@ export default class muiToast extends React.Component {
     return true;
   }
 
-  render() {
-    return (
-      <div>
-        <Snackbar {...this.PROPS} />
-      </div>
-    );
-  }
+  render = () => (
+    <div>
+      <Snackbar {...this.PROPS} />
+    </div>
+  );
 }
