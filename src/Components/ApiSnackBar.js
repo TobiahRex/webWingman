@@ -75,5 +75,8 @@ export default class muiToast extends React.Component {
 }
 
 muiToast.propTypes = {
-  apiStatus: PropTypes.object, // eslint-disable-line
+  apiStatus: PropTypes.shape({
+    fetching: PropTypes.bool,
+    error: PropTypes.bool,
+  }),
 };

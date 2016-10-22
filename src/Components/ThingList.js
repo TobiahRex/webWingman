@@ -29,8 +29,8 @@ ThingList.propTypes = {
   removeThing: PropTypes.func.isRequired,
   editThing: PropTypes.func.isRequired,
   things: PropTypes.array, // eslint-disable-line
-  apiStatus: PropTypes.React.shape({
-    fetching: PropTypes.string,
+  apiStatus: PropTypes.shape({
+    fetching: PropTypes.bool,
   }),
 };
 
