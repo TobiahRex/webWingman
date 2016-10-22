@@ -20,20 +20,23 @@ export const INITIAL_STATE = {
   ips: null,
   active: false,
   error: null,
+  status: '',
 };
 
 // ----- Response Actions ----- //
 
 // This method tracks the device IP's that the user has registered from.
-const registerSuccess = (state, { ips }) => ({
+const registerSuccess = (state, { ips, SUCCESS }) => ({
   ips,
   active: true,
+  status: SUCCESS,
 });
 
 // This method tracks the device IP's that the user is CURRENTLY signed in from.
-const loginSuccess = (state, { ips }) => ({
+const loginSuccess = (state, { ips, SUCCESS }) => ({
   ips,
   active: true,
+  status: SUCCESS,
 });
 
 const logoutSuccess = () => ({
