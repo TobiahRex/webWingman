@@ -19,7 +19,6 @@ const Things = ({ fetching, createThing, editThing, removeThing, things, apiStat
     createThing,
     apiStatus,
   };
-
   return (
     <Card>
       <CardHeader title="React Template" subtitle="API">
@@ -37,8 +36,14 @@ Things.propTypes = {
   createThing: PropTypes.func.isRequired,
   editThing: PropTypes.func.isRequired,
   removeThing: PropTypes.func.isRequired,
-  things: PropTypes.array.isRequired, // eslint-disable-line
-  apiStatus: PropTypes.object.isRequired, // eslint-disable-line
+  things: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.sring,
+  })),
+  apiStatus: {
+    error: PropTypes.string.isRequired,
+    fetching: PropTypes.bool.isRequired,
+    count: PropTypes.number.isRequired,
+  },
 };
 
 const mapStateToProps = state => ({

@@ -4,7 +4,7 @@ import { TextField, RaisedButton } from 'material-ui';
 import styles from './showStyles';
 
 const editGroup = (props) => {
-  const PROPS = {
+  const jsxProps = {
     tf: {
       id: uuid(),
       value: this.state.data.name,
@@ -30,9 +30,9 @@ const editGroup = (props) => {
   };
   return (
     <div>
-      <TextField {...PROPS.tf} />
-      <RaisedButton {...PROPS.rb1} />
-      <RaisedButton {...PROPS.rb2} />
+      <TextField {...jsxProps.tf} />
+      <RaisedButton {...jsxProps.rb1} />
+      <RaisedButton {...jsxProps.rb2} />
     </div>
   );
 };
