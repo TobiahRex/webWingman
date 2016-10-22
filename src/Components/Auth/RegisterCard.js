@@ -11,21 +11,34 @@ import * as Input from '../TextInput/TextField.templates';
 
 const RegisterCard = ({ title, onInputChange, submitNewUser }) => {
   const props = {
-    onChange: onInputChange,
+    all: {
+      onChange: onInputChange,
+    },
+    password: {
+      id: 'password',
+      type: 'password',
+      label: 'Password',
+    },
+    confirmPassword: {
+      id: 'confirmPassword',
+      type: 'password',
+      label: 'Confirm Password',
+    },
   };
+
   return (
     <Card>
       <CardText> {title || "EMPTY prop"} </CardText>
       <CardText>
-        <Input.firstName {...props} />
+        <Input.firstName {...props.all} />
         <br />
-        <Input.lastName {...props} />
+        <Input.lastName {...props.all} />
         <br />
-        <Input.email {...props} />
+        <Input.email {...props.all} />
         <br />
-        <Input.password {...props} />
+        <Input.password {...props.password} {...props.all} />
         <br />
-        <Input.confirmPassword {...props} />
+        <Input.password {...props.confirmPassword} {...props.all} />
         <br />
       </CardText>
       <CardActions>
@@ -45,7 +58,11 @@ const RegisterCard = ({ title, onInputChange, submitNewUser }) => {
 
 RegisterCard.propTypes = {
   title: PropTypes.string,
-  onInputChange: PropTypes.func.isRequired,
+  all: PropTypes.shape({
+    onInputChange: PropTypes.func.isRequired,
+  }),
+  password: PropTypes.shape({}),
+  confirmPassword: PropTypes.shape({}),
   submitNewUser: PropTypes.func.isRequired,
 };
 

@@ -6,8 +6,8 @@ import Actions from '../Redux/AuthRedux';
 
 class RegisterContainer extends React.Component {
   static propTypes = {
-    apiSuccess: PropTypes.string,
-    apiError: PropTypes.string,
+    apiSuccess: PropTypes.bool,
+    apiError: PropTypes.bool,
     registerUser: PropTypes.func.isRequired,
   }
   constructor(props) {

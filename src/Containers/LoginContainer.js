@@ -7,8 +7,8 @@ import Actions from '../Redux/AuthRedux';
 class Login extends React.Component {
   static propTypes = {
     loginUser: PropTypes.func.isRequired,
-    apiError: PropTypes.string,
-    apiSuccess: PropTypes.string,
+    apiError: PropTypes.bool,
+    apiSuccess: PropTypes.bool,
   }
 
   constructor(props) {
@@ -23,6 +23,8 @@ class Login extends React.Component {
     this.LoginProps = {
       title: "Login",
       login: this.submitLogin,
+      onInputChange: this.onInputChange,
+      submitLogin: this.submitLogin,
     };
     this.errorProps = {
       title: 'Login Error',
@@ -38,6 +40,8 @@ class Login extends React.Component {
       ],
     };
   }
+
+  onInputChange = (value, inputId) => this.setState({ [inputId]: value });
 
   submitLogin = () => {
     const { email, password } = this.state;

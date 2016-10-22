@@ -37,7 +37,7 @@ const LoginCard = ({ title, onInputChange, submitLogin }) => (
       <RaisedButton
         label="Login"
         primary
-        onCLick={submitLogin}
+        onClick={submitLogin}
       />
     </CardActions>
   </Card>

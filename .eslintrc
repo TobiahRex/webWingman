@@ -33,6 +33,7 @@
   },
   "rules": {
     "quotes": 0,
+    "jsx-quotes": 0,
     "func-names": 0,
     "forbid-prop-types": "off",
     "consistent-return": 0,
