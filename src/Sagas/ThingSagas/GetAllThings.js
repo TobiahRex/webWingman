@@ -6,7 +6,7 @@ export default function* getAll(api) {
   const response = yield call(() => api.getAllThings());
   if (response.ok) {
     yield [put(thingActions.getAllThingsSuccess(response.data)),
-    put(apiActions.apiSuccess())];
+    put(apiActions.apiSuccess(response.data))];
   } else {
     yield put(apiActions.apiFail(response.problem));
   }

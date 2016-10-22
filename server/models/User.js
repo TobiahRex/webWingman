@@ -36,6 +36,8 @@ const userSchema = new mongoose.Schema({
   oAuths: [{
     type: String,
   }],
+  location: { type: String },
+  photoUrl: { type: String },
   lastLogin: { type: Date },
   activeDevices: [
     {

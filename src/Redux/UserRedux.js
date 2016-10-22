@@ -6,9 +6,10 @@ export const { Types, Creators } = createActions({
 });
 export const userTypes = Types;
 export default Creators;
+
 // ----- Initial State ----- //
 export const INITIAL_STATE = {
-  userID: null,
+  _id: null,
   email: null,
   lastLogin: null,
   location: null,
