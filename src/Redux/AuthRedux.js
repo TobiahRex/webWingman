@@ -5,13 +5,13 @@ const { Types, Creators } = createActions({
   // called in the API
   registerUser: ['userObj'],
   // actual user info is sent to the userReducer (not here)
-  registerSuccess: ['ips'],
+  registerSuccess: ['ips', 'SUCCESS'],
   registerFailure: ['error'],
-  loginUser: ['userCreds'],
-  loginSuccess: ['username'],
-  loginFailure: ['error'],
+  loginUser: ['ips', 'SUCCESS'],
+  loginSuccess: ['ips', 'SUCCESS'],
+  loginFailure: ['ips', 'ERROR'],
   logout: ['userID'],
-  logoutSuccess: null,
+  logoutSuccess: ['ips', 'SUCCESS'],
 });
 
 export const AuthTypes = Types;
@@ -29,6 +29,7 @@ export const INITIAL_STATE = {
 const registerSuccess = (state, { ips, SUCCESS }) => ({
   ips,
   active: true,
+  error: false,
   status: SUCCESS,
 });
 
@@ -36,18 +37,29 @@ const registerSuccess = (state, { ips, SUCCESS }) => ({
 const loginSuccess = (state, { ips, SUCCESS }) => ({
   ips,
   active: true,
+  error: false,
   status: SUCCESS,
 });
 
-const logoutSuccess = () => ({
-  ips: null,
+const logoutSuccess = (state, { ips, SUCCESS }) => ({
+  ips,
   active: false,
-  error: null,
+  error: false,
+  status: SUCCESS,
 });
 
-const loginFailure = ({ error }) => ({ error });
+const loginFailure = (state, { ips, ERROR }) => ({
+  ips,
+  active: false,
+  error: true,
+  status: ERROR,
+});
 
-const registerFailure = ({ error }) => ({ error });
+const registerFailure = (state, { ERROR }) => ({
+  active: false,
+  error: true,
+  status: ERROR,
+});
 
 
 // ----- create Reducer ----- //
