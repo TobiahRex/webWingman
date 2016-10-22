@@ -4,7 +4,8 @@ export const { Types, Creators } = createActions({
   userReceived: ['userObj'],
   userSettingsReceived: ['settings'],
 });
-
+export const userTypes = Types;
+export default Creators;
 // ----- Initial State ----- //
 export const INITIAL_STATE = {
   userID: null,

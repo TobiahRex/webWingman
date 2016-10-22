@@ -24,8 +24,9 @@ export const email = ({ onChange }) => (
   />
 );
 
-export const password = ({ onChange, type, label }) => (
+export const password = ({ id, type, label, onChange }) => (
   <TextField
+    id={id}
     type={type}
     floatingLabelText={label}
     onChange={e => onChange(e.target.value, e.target.getAttribute('id'))}
@@ -42,6 +43,7 @@ email.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 password.propTypes = {
+  id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,

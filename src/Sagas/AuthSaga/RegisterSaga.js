@@ -1,6 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import registerActions from '../../Redux/AuthRedux';
 import userActions from '../../Redux/UserRedux';
+console.log('userActions', userActions);
 import apiActions from '../../Services/API';
 
 export default function* (api, action) {

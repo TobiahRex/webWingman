@@ -24,7 +24,6 @@ const userSchema = new mongoose.Schema({
     super: { type: Boolean, default: false },
     admin: { type: Boolean, default: false },
   },
-  username: { type: String, required: true },
   password: { type: String, required: true },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
