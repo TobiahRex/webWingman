@@ -16,7 +16,7 @@ export default class InputNewThing extends Component {
       newData: '',
     };
     // --- JSX prop
-    this.PROPS = {
+    this.propsJSX = {
       form: {
         onSubmit: this.submitNewThing,
       },
@@ -24,7 +24,7 @@ export default class InputNewThing extends Component {
         hintText: "Thing Name",
         type: "text",
         floatingLabelText: "New Thing Input",
-        onChange: e => this.onInputChange(e),
+        onChange: e => this.setState({ newData: e.target.value }),
         required: true,
         value: this.state.newData,
       },
@@ -39,40 +39,28 @@ export default class InputNewThing extends Component {
         secondary: true,
         label: "clear",
         type: "button",
-        onClick: () => this.clearInput(),
+        onClick: () => this.setState({ newData: '' }),
       },
     };
-
-    // --- Bindings
-    this.submitNewThing = this.submitNewThing.bind(this);
-    this.onInputChange = this.onInputChange.bind(this);
-    this.clearInput = this.clearInput.bind(this);
   }
 
   // ------------ Static Methods ------------
-  onInputChange(e) {
-    this.setState({ newData: e.target.value });
-  }
 
-  submitNewThing(e) {
-    e.preventDefault();
+  submitNewThing = () => {
+    event.preventDefault();
     this.setState({ newData: '' });
     this.props.fetching();
     this.props.createThing({ name: this.state.newData });
-  }
-
-  clearInput() {
-    this.setState({ newData: '' });
   }
 
   // ------------ lifeCycle ------------
 
   render() {
     return (<div>
-      <form {...this.PROPS.form}>
-        <TextField {...this.PROPS.tf} />
-        <RaisedButton {...this.PROPS.rb1} />
-        <RaisedButton {...this.PROPS.rb2} />
+      <form {...this.propsJSX.form}>
+        <TextField {...this.propsJSX.tf} />
+        <RaisedButton {...this.propsJSX.rb1} />
+        <RaisedButton {...this.propsJSX.rb2} />
       </form>
     </div>);
   }

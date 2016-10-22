@@ -6,11 +6,11 @@ Should contain, an error, success, & fetching boolean.
 */
 export default class muiToast extends React.Component {
   static propTypes = {
-    apiStatus: {
+    apiStatus: PropTypes.shape({
       error: PropTypes.string,
       fetching: PropTypes.string,
-    },
-  };
+    }),
+  }
 
   constructor(props) {
     super(props);

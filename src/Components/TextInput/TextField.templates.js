@@ -44,10 +44,3 @@ email.propTypes = {
 password.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
-
-/* Received Props
-const props = {
-required: true,
-onChange: e => onInputChange(e.target.value, e.target.getAttribute('id')),
-};
-*/

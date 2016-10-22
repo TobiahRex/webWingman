@@ -60,7 +60,7 @@ export default class muiToast extends React.Component {
   }
 
   render() {
-    const PROPS = {
+    const propsJSX = {
       open: this.state.show,
       message: this.state.message,
       autoHideDuration: 2000,
@@ -68,7 +68,7 @@ export default class muiToast extends React.Component {
     };
     return (
       <div>
-        <Snackbar {...PROPS} />
+        <Snackbar {...propsJSX} />
       </div>
     );
   }

@@ -5,7 +5,7 @@ import SnackBar from '../Components/ApiSnackBar';
 
 const ThingList = ({ fetching, removeThing, editThing, things, apiStatus }) => {
   const eachThing = things.map((thing) => {
-    const PROPS = {
+    const propsJSX = {
       fetching,
       editThing,
       removeThing,
@@ -13,7 +13,7 @@ const ThingList = ({ fetching, removeThing, editThing, things, apiStatus }) => {
       data: thing,
     };
 
-    return (<div key={uuid()}><Thing {...PROPS} /></div>);
+    return (<div key={uuid()}><Thing {...propsJSX} /></div>);
   });
 
   return (
@@ -29,10 +29,9 @@ ThingList.propTypes = {
   removeThing: PropTypes.func.isRequired,
   editThing: PropTypes.func.isRequired,
   things: PropTypes.array, // eslint-disable-line
-  apiStatus: {
-    error: PropTypes.string,
+  apiStatus: PropTypes.React.shape({
     fetching: PropTypes.string,
-  },
+  }),
 };
 
 export default ThingList;

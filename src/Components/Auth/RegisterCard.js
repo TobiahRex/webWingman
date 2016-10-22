@@ -7,7 +7,7 @@ import {
   RaisedButton,
   FlatButton,
 } from 'material-ui';
-import * as Input from './TextInput/TextField.templates';
+import * as Input from '../TextInput/TextField.templates';
 
 const RegisterCard = ({ title, onInputChange, submitNewUser }) => {
   const props = {

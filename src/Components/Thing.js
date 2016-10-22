@@ -43,7 +43,7 @@ export default class Thing extends Component {
   }
 
   render() {
-    const PROPS = {
+    const propsJSX = {
       edit: {
         submit: this.submitEdit,
         updateState: this.udpateState,
@@ -57,7 +57,7 @@ export default class Thing extends Component {
     return (
       <div>
         {this.state.edit ?
-          <EditGroup {...PROPS.edit} /> : <ShowGroup {...PROPS.show} />
+          <EditGroup {...propsJSX.edit} /> : <ShowGroup {...propsJSX.show} />
         }
       </div>
     );
