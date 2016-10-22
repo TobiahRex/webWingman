@@ -58,6 +58,7 @@ const RegisterCard = ({ title, onInputChange, submitNewUser }) => {
 
 RegisterCard.propTypes = {
   title: PropTypes.string,
+  onInputChange: PropTypes.func.isRequired,
   all: PropTypes.shape({
     onInputChange: PropTypes.func.isRequired,
   }),
