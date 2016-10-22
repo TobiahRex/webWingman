@@ -6,26 +6,27 @@ import EditGroup from './Crud/edit/editGroup.template';
 export default class Thing extends Component {
   static propTypes = {
     fetching: PropTypes.func.isRequired,
-    data: {
-      name: PropTypes.string,
-      _id: PropTypes.string,
-    },
+    name: PropTypes.string,
+    _id: PropTypes.string,
     editThing: PropTypes.func.isRequired,
     removeThing: PropTypes.func.isRequired,
-  };
+  }
 
   constructor(props) {
     super(props);
     this.state = {
-      data: this.props.data,
-      newName: this.props.data.name,
+      _id: this.props._id,
+      name: this.props.name,
+      newName: this.props.name,
       edit: false,
     };
   }
 
   submitEdit = () => {
-    const newThing = this.state.data;
-    newThing.name = this.state.newName;
+    const newThing = {
+      _id: this.state._id,
+      name: this.state.newName,
+    };
 
     this.props.fetching();
     this.props.editThing(newThing);
@@ -37,7 +38,7 @@ export default class Thing extends Component {
       case 'edit': this.setState({ edit: value }); break;
       case 'newName': this.setState({ newName: value }); break;
       case 'submit': this.setState({ edit: false, value }); break;
-      case 'cancel': this.setState({ edit: false, data: this.props.data }); break;
+      case 'cancel': this.setState({ edit: false, name: this.props.name }); break;
       default: break;
     }
   }
@@ -45,11 +46,14 @@ export default class Thing extends Component {
   render() {
     const propsJSX = {
       edit: {
-        submit: this.submitEdit,
-        updateState: this.udpateState,
+        submitEdit: this.submitEdit,
+        updateState: this.updateState,
+        newName: this.state.newName,
       },
       show: {
-        updateState: this.udpateState,
+        _id: this.state._id,
+        name: this.state.name,
+        updateState: this.updateState,
         removeThing: this.props.removeThing,
         fetching: this.props.fetching,
       },

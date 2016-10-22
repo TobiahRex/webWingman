@@ -3,6 +3,7 @@ import thingActions from '../../Redux/ThingRedux';
 import apiActions from '../../Redux/ApiRedux';
 
 export default function* remove(api, action) {
+  console.log('action', action);
   const response = yield call(() => api.removeThing(action.thingId));
   if (response.ok) {
     yield [put(thingActions.removeThingSuccess(response.data)),

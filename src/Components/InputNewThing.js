@@ -15,10 +15,21 @@ export default class InputNewThing extends Component {
     this.state = {
       newData: '',
     };
-    // --- JSX prop
-    this.propsJSX = {
+  }
+  // ------------ Static Methods ------------
+
+  submitNewThing = (e) => {
+    e.preventDefault();
+    this.setState({ newData: '' });
+    this.props.fetching();
+    this.props.createThing({ name: this.state.newData });
+  }
+  // ------------ lifeCycle ------------
+
+  render() {
+    const propsJSX = {
       form: {
-        onSubmit: this.submitNewThing,
+        onSubmit: e => this.submitNewThing(e),
       },
       tf: {
         hintText: "Thing Name",
@@ -42,26 +53,14 @@ export default class InputNewThing extends Component {
         onClick: () => this.setState({ newData: '' }),
       },
     };
-  }
-
-  // ------------ Static Methods ------------
-
-  submitNewThing = () => {
-    event.preventDefault();
-    this.setState({ newData: '' });
-    this.props.fetching();
-    this.props.createThing({ name: this.state.newData });
-  }
-
-  // ------------ lifeCycle ------------
-
-  render() {
-    return (<div>
-      <form {...this.propsJSX.form}>
-        <TextField {...this.propsJSX.tf} />
-        <RaisedButton {...this.propsJSX.rb1} />
-        <RaisedButton {...this.propsJSX.rb2} />
-      </form>
-    </div>);
+    return (
+      <div>
+        <form {...propsJSX.form}>
+          <TextField {...propsJSX.tf} />
+          <RaisedButton {...propsJSX.rb1} />
+          <RaisedButton {...propsJSX.rb2} />
+        </form>
+      </div>
+    );
   }
 }

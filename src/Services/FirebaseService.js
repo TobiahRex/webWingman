@@ -50,7 +50,7 @@ firebase.auth().onAuthStateChanged((user) => {
     setActiveUsersListener();
     setUpdateUserListener();
   } else {
-    browserHistory.push('/Home');
+    browserHistory.push('/home');
   }
 });
 

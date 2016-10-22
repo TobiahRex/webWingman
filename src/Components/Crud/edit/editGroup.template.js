@@ -3,22 +3,22 @@ import uuid from 'uuid';
 import { TextField, RaisedButton } from 'material-ui';
 import styles from './editStyles';
 
-const editGroup = (props) => {
+const editGroup = ({ newName, updateState, submitEdit }) => {
   const propsJSX = {
     tf: {
       id: uuid(),
-      onChange: e => props.updateState('newName', e.target.value),
-      value: this.state.newName,
+      onChange: e => updateState('newName', e.target.value),
+      value: newName,
     },
     rb1: {
-      onClick: props.submitEdit,
+      onClick: submitEdit,
       type: "submit",
       label: "Submit",
       style: styles.lftMargin,
       primary: true,
     },
     rb2: {
-      onClick: () => props.updateState('cancel'),
+      onClick: () => updateState('cancel'),
       type: "button",
       label: "Cancel",
       style: styles.btnMargin,
@@ -35,8 +35,9 @@ const editGroup = (props) => {
 };
 
 editGroup.propTypes = {
-  updateState: PropTypes.func.isRequired,
+  newName: PropTypes.string.isRequired,
   submitEdit: PropTypes.func.isRequired,
+  updateState: PropTypes.func.isRequired,
 };
 
 export default editGroup;

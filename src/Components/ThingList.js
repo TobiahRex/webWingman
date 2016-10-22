@@ -10,10 +10,15 @@ const ThingList = ({ fetching, removeThing, editThing, things, apiStatus }) => {
       editThing,
       removeThing,
       apiStatus,
-      data: thing,
+      name: thing.name,
+      _id: thing._id,
     };
 
-    return (<div key={uuid()}><Thing {...propsJSX} /></div>);
+    return (
+      <div key={uuid()}>
+        <Thing {...propsJSX} />
+      </div>
+    );
   });
 
   return (
@@ -28,7 +33,10 @@ ThingList.propTypes = {
   fetching: PropTypes.func.isRequired,
   removeThing: PropTypes.func.isRequired,
   editThing: PropTypes.func.isRequired,
-  things: PropTypes.array, // eslint-disable-line
+  things: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    _id: PropTypes.string,
+  })),
   apiStatus: PropTypes.shape({
     fetching: PropTypes.bool,
   }),

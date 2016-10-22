@@ -3,27 +3,27 @@ import uuid from 'uuid';
 import { TextField, RaisedButton } from 'material-ui';
 import styles from './showStyles';
 
-const editGroup = (props) => {
+const showGroup = ({ fetching, removeThing, updateState, name, _id }) => {
   const propsJSX = {
     tf: {
       id: uuid(),
-      value: this.state.data.name,
+      value: name,
       disabled: true,
     },
     rb1: {
-      onClick: () => props.updateState('edit', true),
-      type: "button",
-      label: "Edit",
+      onClick: () => updateState('edit', true),
+      type: 'button',
+      label: 'Edit',
       style: styles.lftMargin,
       primary: true,
     },
     rb2: {
       onClick: () => {
-        props.fetching();
-        props.removeThing(this.props.data._id);
+        fetching();
+        removeThing(_id);
       },
-      type: "button",
-      label: "Remove",
+      type: 'button',
+      label: 'Remove',
       style: styles.btnMargin,
       secondary: true,
     },
@@ -37,10 +37,12 @@ const editGroup = (props) => {
   );
 };
 
-editGroup.propTypes = {
+showGroup.propTypes = {
+  _id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   fetching: PropTypes.func.isRequired,
   removeThing: PropTypes.func.isRequired,
   updateState: PropTypes.func.isRequired, //eslint-disable-line
 };
 
-export default editGroup;
+export default showGroup;

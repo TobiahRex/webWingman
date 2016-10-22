@@ -31,7 +31,7 @@ const RegisterCard = ({ title, onInputChange, submitNewUser }) => {
       <CardActions>
         <FlatButton
           label="Need to Login?"
-          onClick={() => browserHistory.push('/Login')}
+          onClick={() => browserHistory.push('/login')}
         />
         <RaisedButton
           label="Register"

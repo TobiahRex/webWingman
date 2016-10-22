@@ -6,7 +6,7 @@ import apiActions from '../Redux/ApiRedux';
 import ThingList from '../Components/ThingList';
 import InputNewThing from '../Components/InputNewThing';
 
-const Things = ({ fetching, createThing, editThing, removeThing, things, apiStatus }) => {
+const ThingsContainer = ({ fetching, createThing, editThing, removeThing, things, apiStatus }) => {
   const propsThingList = {
     fetching,
     editThing,
@@ -31,7 +31,7 @@ const Things = ({ fetching, createThing, editThing, removeThing, things, apiStat
   );
 };
 
-Things.propTypes = {
+ThingsContainer.propTypes = {
   fetching: PropTypes.func.isRequired,
   createThing: PropTypes.func.isRequired,
   editThing: PropTypes.func.isRequired,
@@ -39,11 +39,9 @@ Things.propTypes = {
   things: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.sring, //eslint-disable-line
   })),
-  apiStatus: {
-    error: PropTypes.string.isRequired,
+  apiStatus: PropTypes.shape({
     fetching: PropTypes.bool.isRequired,
-    count: PropTypes.number.isRequired,
-  },
+  }),
 };
 
 const mapStateToProps = state => ({
@@ -57,4 +55,4 @@ const mapDispatchToProps = dispatch => ({
   editThing: thing => dispatch(Actions.editThing(thing)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Things);
+export default connect(mapStateToProps, mapDispatchToProps)(ThingsContainer);

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Dialog, FlatButton } from 'material-ui';
-import LoginCard from '../Components/LoginCard';
+import LoginCard from '../Components/Auth/LoginCard';
 import Actions from '../Redux/AuthRedux';
 
 class Login extends React.Component {

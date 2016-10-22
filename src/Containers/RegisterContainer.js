@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Dialog, FlatButton } from 'material-ui';
-import RegisterCard from '../Components/RegisterCard';
+import RegisterCard from '../Components/Auth/RegisterCard';
 import Actions from '../Redux/AuthRedux';
 
 class RegisterContainer extends React.Component {
@@ -26,7 +26,7 @@ class RegisterContainer extends React.Component {
       submitNewUser: () => this.submitNewUser(this.state),
       onInputChange: this.onInputChange,
     };
-    this.jsxProps = {
+    this.propsJSX = {
       error: {
         title: 'Password Error',
         open: false,
@@ -64,9 +64,9 @@ class RegisterContainer extends React.Component {
         error: this.props.apiError,
         success: '',
       },
-      () => (this.jsxProps.error.open = true));
+      () => (this.propsJSX.error.open = true));
     } else {
-      this.jsxProps.success.open = true;
+      this.propsJSX.success.open = true;
       this.setState({
         error: '',
         success: this.props.apiSuccess,
@@ -76,16 +76,16 @@ class RegisterContainer extends React.Component {
   }
 
   clearDialog = (type) => {
-    if (type === 'error') this.jsxProps.error.open = false;
-    this.jsxProps.success.open = false;
+    if (type === 'error') this.propsJSX.error.open = false;
+    this.propsJSX.success.open = false;
     this.setState({ [type]: '' });
   }
 
   render = () => (
     <div>
       <RegisterCard {...this.RegisterProps} />
-      <Dialog {...this.jsxProps.error} > {this.state.error} </Dialog>
-      <Dialog {...this.jsxProps.error} > {this.state.success} </Dialog>
+      <Dialog {...this.propsJSX.error} > {this.state.error} </Dialog>
+      <Dialog {...this.propsJSX.error} > {this.state.success} </Dialog>
     </div>
   );
 }
