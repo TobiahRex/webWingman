@@ -63,19 +63,21 @@ class RegisterContainer extends React.Component {
   submitNewUser = ({ email, firstName, lastName, password }) => {
     if (this.state.confirmPassword !== this.state.password) {
       this.setState({
-        error: this.props.apiError,
-        statusMsg: this.props.statusMsg,
+        error: 'Password do not match. Please Try again.',
         success: '',
       },
       () => (this.propsJSX.error.open = true));
-    } else {
-      this.propsJSX.success.open = true;
+    } else if (this.props.apiError) {
+      this.setState({ error: this.props.statusMsg },
+      () => (this.propsJSX.error.open = true));
+    } else if (this.props.apiSuccess) {
       this.setState({
         error: '',
-        statusMsg: this.props.statusMsg,
-        success: this.props.apiSuccess,
-      },
-      () => this.props.registerUser({ email, firstName, lastName, password }));
+        success: this.props.statusMsg,
+      }, () => {
+        this.propsJSX.success.open = true;
+        this.props.registerUser({ email, firstName, lastName, password });
+      });
     }
   }
 
