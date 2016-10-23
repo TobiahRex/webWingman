@@ -59,17 +59,18 @@ class RegisterContainer extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (!this.state.attempted) return;
-
     if (nextProps.apiSuccess) {
+      this.propsJSX.success.open = true;
       this.setState({
         attempted: false,
-        success: this.state.statusMsg,
-      }, () => (this.propsJSX.success.open = true));
+        success: nextProps.statusMsg,
+      });
     } else {
+      this.propsJSX.error.open = true;
       this.setState({
         atttempted: false,
-        error: this.state.statusMsg,
-      }, () => (this.propsJSX.error.open = true));
+        error: nextProps.statusMsg,
+      });
     }
   }
 
