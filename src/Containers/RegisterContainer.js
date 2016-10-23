@@ -61,14 +61,14 @@ class RegisterContainer extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (!this.state.attempted) return;
-
-    if (nextProps.apiSuccess) {
+    if (nextProps.authError === false) {
       this.propsJSX.success.open = true;
       this.setState({
         attempted: false,
         success: nextProps.statusMsg,
       });
     } else {
+      this.propsJSX.title = 'Registration Error.';
       this.propsJSX.error.open = true;
       this.setState({
         atttempted: false,
@@ -101,15 +101,13 @@ class RegisterContainer extends React.Component {
     });
   }
 
-  render = () => {
-    console.log({...this.propsJSX.error});
-    return (
+  render = () => (
     <div>
       <RegisterCard {...this.RegisterProps} />
       <Dialog {...this.propsJSX.error} > {this.state.error} </Dialog>
       <Dialog {...this.propsJSX.success} > {this.state.success} </Dialog>
     </div>
-  )}
+  )
 }
 
 const mapDispatchToProps = dispatch => ({
@@ -117,9 +115,8 @@ const mapDispatchToProps = dispatch => ({
 });
 const mapStateToProps = state => ({
   apiSuccess: state.api.success,
-  apiError: state.api.error,
+  authError: state.auth.error,
   statusMsg: state.auth.status,
-  active: state.auth.active,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegisterContainer);
