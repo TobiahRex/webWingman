@@ -21,6 +21,7 @@ class RegisterContainer extends React.Component {
       confirmPassword: '',
       error: '',
       success: '',
+      statusMsg: this.props.statusMsg ? this.showDialog : this.props.statusMsg,
     };
     this.RegisterProps = {
       title: 'Register',
@@ -64,36 +65,38 @@ class RegisterContainer extends React.Component {
       this.setState({
         error: 'Password do not match. Please Try again.',
         success: '',
-      },
-      () => (this.propsJSX.error.open = true));
-    } else if (this.props.apiError) {
-      this.setState({ error: this.props.statusMsg },
-      () => (this.propsJSX.error.open = true));
-    } else if (this.props.apiSuccess) {
-      this.setState({
-        error: '',
-        success: this.props.statusMsg,
-      }, () => (this.propsJSX.success.open = true));
+      }, () => (this.propsJSX.error.open = true));
     } else {
       this.props.registerUser({ email, firstName, lastName, password });
+    }
+  }
+
+  showDialog = () => {
+    if (this.state.apiError) {
+      this.setState({ error: this.state.statusMsg },
+        () => (this.propsJSX.error.open = true));
+    } else {
+      this.setState({ success: this.state.statusMsg },
+      () => (this.propsJSX.success.opne = true));
     }
   }
 
   clearDialog = (type) => {
     if (type === 'error') this.propsJSX.error.open = false;
     this.propsJSX.success.open = false;
-    this.setState({ [type]: '' });
+    this.setState({
+      [type]: '',
+      statusMsg: '',
+    });
   }
 
-  render = () => {
-    console.log('this.state.success: ', this.state.success);
-    return (
+  render = () => (
     <div>
       <RegisterCard {...this.RegisterProps} />
       <Dialog {...this.propsJSX.error} > {this.state.error} </Dialog>
       <Dialog {...this.propsJSX.success} > {this.state.success} </Dialog>
     </div>
-  );}
+  )
 }
 
 const mapDispatchToProps = dispatch => ({
