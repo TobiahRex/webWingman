@@ -21,7 +21,7 @@ class RegisterContainer extends React.Component {
       confirmPassword: '',
       error: '',
       success: '',
-      statusMsg: this.props.statusMsg,
+      statusMsg: '',
     };
     this.RegisterProps = {
       title: 'Register',
@@ -34,7 +34,6 @@ class RegisterContainer extends React.Component {
         open: false,
         onRequestClose: () => this.clearDialog('error'),
         modal: true,
-        statusMsg: this.state.statusMsg,
         actions: [
           <FlatButton
             primary
@@ -48,7 +47,6 @@ class RegisterContainer extends React.Component {
         open: false,
         onRequestClose: () => this.clearDialog('success'),
         modal: true,
-        statusMsg: this.state.statusMsg,
         actions: [
           <FlatButton
             primary
@@ -66,6 +64,7 @@ class RegisterContainer extends React.Component {
     if (this.state.confirmPassword !== this.state.password) {
       this.setState({
         error: this.props.apiError,
+        statusMsg: this.props.statusMsg,
         success: '',
       },
       () => (this.propsJSX.error.open = true));
@@ -73,6 +72,7 @@ class RegisterContainer extends React.Component {
       this.propsJSX.success.open = true;
       this.setState({
         error: '',
+        statusMsg: this.props.statusMsg,
         success: this.props.apiSuccess,
       },
       () => this.props.registerUser({ email, firstName, lastName, password }));
