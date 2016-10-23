@@ -6,9 +6,10 @@ import apiActions from '../../Redux/ApiRedux';
 export default function* (api, action) {
   const response = yield call(() => api.register(action));
   if (response.ok) {
-    yield [put(authActions.registerSuccess(response.data.user.activeDevices)),
+    yield [put(authActions.registerSuccess(response.data.user.activeDevices,
+      response.data.SUCCESS)),
     put(userActions.userReceived(response.data.user)),
-    put(apiActions.apiSuccess(response.data))];
+    put(apiActions.apiSuccess())];
   } else {
     yield [put(authActions.registerFailure(response.problem)),
     put(apiActions.apiFail(response.problem))];

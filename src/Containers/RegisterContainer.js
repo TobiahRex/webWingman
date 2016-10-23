@@ -9,6 +9,7 @@ class RegisterContainer extends React.Component {
     apiSuccess: PropTypes.bool,
     apiError: PropTypes.bool,
     registerUser: PropTypes.func.isRequired,
+    statusMsg: PropTypes.string,
   }
   constructor(props) {
     super(props);
@@ -20,6 +21,7 @@ class RegisterContainer extends React.Component {
       confirmPassword: '',
       error: '',
       success: '',
+      statusMsg: this.props.statusMsg,
     };
     this.RegisterProps = {
       title: 'Register',
@@ -32,6 +34,7 @@ class RegisterContainer extends React.Component {
         open: false,
         onRequestClose: () => this.clearDialog('error'),
         modal: true,
+        statusMsg: this.state.statusMsg,
         actions: [
           <FlatButton
             primary
@@ -45,6 +48,7 @@ class RegisterContainer extends React.Component {
         open: false,
         onRequestClose: () => this.clearDialog('success'),
         modal: true,
+        statusMsg: this.state.statusMsg,
         actions: [
           <FlatButton
             primary
@@ -85,7 +89,7 @@ class RegisterContainer extends React.Component {
     <div>
       <RegisterCard {...this.RegisterProps} />
       <Dialog {...this.propsJSX.error} > {this.state.error} </Dialog>
-      <Dialog {...this.propsJSX.error} > {this.state.success} </Dialog>
+      <Dialog {...this.propsJSX.success} > {this.state.success} </Dialog>
     </div>
   );
 }
@@ -96,6 +100,7 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = state => ({
   apiSuccess: state.api.success,
   apiError: state.api.error,
+  statusMsg: state.auth.status,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegisterContainer);
