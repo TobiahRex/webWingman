@@ -48,8 +48,7 @@ const userSchema = new mongoose.Schema({
 });
 
 /* ----- User Auth Methods & Statics ----- */
-userSchema.statics.registerNewUser = function (newUser, header, cb) {
-  console.log('ip result: ', header);
+userSchema.statics.registerNewUser = function (newUser, ip, cb) {
   let dbUserRef;
   this.findOne({ email: newUser.email }).exec()
   .then((dbUser) => {
@@ -66,7 +65,7 @@ userSchema.statics.registerNewUser = function (newUser, header, cb) {
   })
   .then((token) => {
     dbUserRef.registration.verifyLink = `${HOSTED_URL}/api/users/verify/${token}`;
-    dbUserRef.activeDevices.push(header.origin);
+    dbUserRef.activeDevices.push(ip);
     return dbUserRef.save();
   })
   .then(savedUser => Email.verify(savedUser))
