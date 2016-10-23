@@ -6,11 +6,11 @@ import userActions from '../../Redux/UserRedux';
 export default function* login(api, action) {
   const response = yield call(api.login(action.user));
   if (response.ok) {
-    yield [put(loginActions.loginSuccess(response.data)),
-      put(userActions.userReceived(response.data)),
-    put(apiActions.apiSuccess(response.data))];
+    yield [put(loginActions.loginSuccess(response.data, response.data.SUCCESS)),
+      put(userActions.userReceived(response.data.user)),
+    put(apiActions.apiSuccess())];
   } else {
-    yield [put(loginActions.loginFailure(response.problem)),
-      put(apiActions.apiFailure(response.problem))];
+    yield [put(loginActions.loginFailure(response.problem, response.data.ERROR)),
+      put(apiActions.apiFailure())];
   }
 }

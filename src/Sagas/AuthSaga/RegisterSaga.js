@@ -12,6 +12,6 @@ export default function* (api, action) {
     put(apiActions.apiSuccess())];
   } else {
     yield [put(authActions.registerFailure(response.problem)),
-    put(apiActions.apiFail(response.problem))];
+    put(apiActions.apiFail())];
   }
 }

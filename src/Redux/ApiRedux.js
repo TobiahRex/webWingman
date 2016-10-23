@@ -3,7 +3,7 @@ import { createActions, createReducer } from 'reduxsauce';
 // ------- Types & Creators ------- //
 const { Types, Creators } = createActions({
   fetching: null,
-  apiFail: ['error'],
+  apiFail: null,
   apiSuccess: null,
 });
 
@@ -27,11 +27,11 @@ const success = state => ({
   success: true,
 });
 
-const fail = (state, { error }) => ({
+const fail = state => ({
   fetching: false,
   count: state.fetching - 1,
   success: false,
-  error,
+  error: true,
 });
 
 const fetching = state => ({
