@@ -4,7 +4,7 @@ import User from '../models/user';
 const router = new express.Router();
 
 // router.post('/register_phone/:id', (req, res) => PhoneToken.get(req.params.id, res.handle));
-router.post('/register', (req, res) => User.registerNewUser(req.body, req.headers.origin, res.handle));
+router.post('/register', (req, res) => User.registerNewUser(req.body, req.headers['x-forwarded-for'] || req.connection.remoteAddress, res.handle));
 
 router.get('/verify/:token', (req, res) => User.emailVerified(req.params.token, res.handle));
 

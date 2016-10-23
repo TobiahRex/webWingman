@@ -48,7 +48,8 @@ const userSchema = new mongoose.Schema({
 });
 
 /* ----- User Auth Methods & Statics ----- */
-userSchema.statics.registerNewUser = function (newUser, header, cb) {
+userSchema.statics.registerNewUser = function (newUser, result, cb) {
+  console.log('ip result: ', result);
   let dbUserRef;
   this.findOne({ email: newUser.email }).exec()
   .then((dbUser) => {

@@ -30,29 +30,42 @@ class RegisterContainer extends React.Component {
     };
 
     this.propsJSX = {
-      error: {
+      passwordError: {
         title: 'Password Error',
         open: false,
-        onRequestClose: () => this.clearDialog('error'),
+        onRequestClose: this.clearDialog,
         modal: true,
         actions: [
           <FlatButton
             primary
             label="CLOSE"
-            onTouchTap={() => this.clearDialog('error')}
+            onTouchTap={this.clearDialog}
+          />,
+        ],
+      },
+      registerError: {
+        title: 'Registration Error.',
+        open: false,
+        onRequestClose: this.clearDialog,
+        modal: true,
+        actions: [
+          <FlatButton
+            primary
+            label="CLOSE"
+            onTouchTap={this.clearDialog}
           />,
         ],
       },
       success: {
         title: 'Success!',
         open: false,
-        onRequestClose: () => this.clearDialog('success'),
+        onRequestClose: this.clearDialog,
         modal: true,
         actions: [
           <FlatButton
             primary
             label="OK"
-            onTouchTap={() => this.clearDialog('success')}
+            onTouchTap={this.clearDialog}
           />,
         ],
       },
@@ -68,8 +81,7 @@ class RegisterContainer extends React.Component {
         success: nextProps.statusMsg,
       });
     } else {
-      this.propsJSX.title = 'Registration Error.';
-      this.propsJSX.error.open = true;
+      this.propsJSX.registerError.open = true;
       this.setState({
         atttempted: false,
         error: nextProps.statusMsg,
@@ -91,12 +103,14 @@ class RegisterContainer extends React.Component {
     }
   }
 
-  clearDialog = (type) => {
-    if (type === 'error') this.propsJSX.error.open = false;
+  clearDialog = () => {
+    this.propsJSX.error.open = false;
+    this.propsJSX.registerError.open = false;
     this.propsJSX.success.open = false;
 
     this.setState({
-      [type]: '',
+      success: '',
+      error: '',
       statusMsg: '',
     });
   }
@@ -104,8 +118,9 @@ class RegisterContainer extends React.Component {
   render = () => (
     <div>
       <RegisterCard {...this.RegisterProps} />
-      <Dialog {...this.propsJSX.error} > {this.state.error} </Dialog>
+      <Dialog {...this.propsJSX.passwordError} > {this.state.error} </Dialog>
       <Dialog {...this.propsJSX.success} > {this.state.success} </Dialog>
+      <Dialog {...this.propsJSX.registerError} > {this.state.error} </Dialog>
     </div>
   )
 }
