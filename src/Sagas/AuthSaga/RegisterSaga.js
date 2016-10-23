@@ -11,7 +11,7 @@ export default function* (api, action) {
     put(userActions.userReceived(response.data.user)),
     put(apiActions.apiSuccess())];
   } else {
-    yield [put(authActions.registerFailure(response.problem)),
+    yield [put(authActions.registerFailure(response.data.ERROR)),
     put(apiActions.apiFail())];
   }
 }

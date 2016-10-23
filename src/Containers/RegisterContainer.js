@@ -4,6 +4,8 @@ import { Dialog, FlatButton } from 'material-ui';
 import RegisterCard from '../Components/Auth/RegisterCard';
 import Actions from '../Redux/AuthRedux';
 
+// TODO: use browserHistory.push('/profile/:id') upon successful registration.
+
 class RegisterContainer extends React.Component {
   static propTypes = {
     registerUser: PropTypes.func.isRequired,
@@ -36,7 +38,7 @@ class RegisterContainer extends React.Component {
         actions: [
           <FlatButton
             primary
-            label="OK"
+            label="CLOSE"
             onTouchTap={() => this.clearDialog('error')}
           />,
         ],
@@ -59,6 +61,7 @@ class RegisterContainer extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (!this.state.attempted) return;
+
     if (nextProps.apiSuccess) {
       this.propsJSX.success.open = true;
       this.setState({
@@ -98,13 +101,15 @@ class RegisterContainer extends React.Component {
     });
   }
 
-  render = () => (
+  render = () => {
+    console.log({...this.propsJSX.error});
+    return (
     <div>
       <RegisterCard {...this.RegisterProps} />
       <Dialog {...this.propsJSX.error} > {this.state.error} </Dialog>
       <Dialog {...this.propsJSX.success} > {this.state.success} </Dialog>
     </div>
-  )
+  )}
 }
 
 const mapDispatchToProps = dispatch => ({
