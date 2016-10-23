@@ -96,7 +96,7 @@ class RegisterContainer extends React.Component {
       this.setState({
         error: 'Password do not match. Please Try again.',
         success: '',
-      }, () => (this.propsJSX.error.open = true));
+      }, () => (this.propsJSX.passwordError.open = true));
     } else {
       this.setState({ attempted: true },
       () => this.props.registerUser({ email, firstName, lastName, password }));
@@ -104,7 +104,7 @@ class RegisterContainer extends React.Component {
   }
 
   clearDialog = () => {
-    this.propsJSX.error.open = false;
+    this.propsJSX.passwordError.open = false;
     this.propsJSX.registerError.open = false;
     this.propsJSX.success.open = false;
 
