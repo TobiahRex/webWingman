@@ -7,9 +7,9 @@ const { Types, Creators } = createActions({
   // actual user info is sent to the userReducer (not here)
   registerSuccess: ['ips', 'success'],
   registerFailure: ['error'],
-  loginUser: ['ips', 'success'],
+  loginUser: ['userCreds'],
   loginSuccess: ['ips', 'success'],
-  loginFailure: ['ips', 'ERROR'],
+  loginFailure: ['ERROR'],
   logout: ['userID'],
   logoutSuccess: ['ips', 'success'],
 });

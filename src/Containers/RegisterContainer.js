@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import { Dialog, FlatButton } from 'material-ui';
 import RegisterCard from '../Components/Auth/RegisterCard';
 import Actions from '../Redux/AuthRedux';
@@ -79,7 +80,7 @@ class RegisterContainer extends React.Component {
       this.setState({
         attempted: false,
         success: nextProps.statusMsg,
-      });
+      }, () => browserHistory.push('/login'));
     } else {
       this.propsJSX.registerError.open = true;
       this.setState({
@@ -109,9 +110,14 @@ class RegisterContainer extends React.Component {
     this.propsJSX.success.open = false;
 
     this.setState({
-      success: '',
+      email: '',
+      firstName: '',
+      lastName: '',
+      password: '',
+      confirmPassword: '',
       error: '',
-      statusMsg: '',
+      success: '',
+      attepted: false,
     });
   }
 

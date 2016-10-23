@@ -65,7 +65,7 @@ userSchema.statics.registerNewUser = function (newUser, ip, cb) {
   })
   .then((token) => {
     dbUserRef.registration.verifyLink = `${HOSTED_URL}/api/users/verify/${token}`;
-    dbUserRef.activeDevices.push(ip);
+    dbUserRef.activeDevices.push({ ip });
     return dbUserRef.save();
   })
   .then(savedUser => Email.verify(savedUser))
@@ -84,11 +84,11 @@ userSchema.statics.registerNewUser = function (newUser, ip, cb) {
   })
   .catch(err => cb(err));
 };
-userSchema.statics.authenticate = function ({ username, password }, cb) {
-  if (!username || !password) return cb({ ERROR: 'Required username || password missing.' });
+userSchema.statics.authenticate = function ({ email, password }, cb) {
+  if (!email || !password) return cb({ ERROR: 'Required email || password missing.' });
   let dbUserRef;
   let tokenRef;
-  return this.findOne({ username }, 'password')
+  return this.findOne({ email }, 'password')
   .then((dbUser) => {
     dbUserRef = dbUser;
     return BCRYPT.compareAsync(password, dbUser.password);
@@ -100,7 +100,7 @@ userSchema.statics.authenticate = function ({ username, password }, cb) {
   })
   .then((savedUser) => {
     savedUser.password = null;
-    return cb({ tokenRef, savedUser });
+    return cb(null, { tokenRef, savedUser });
   })
   .catch(err => cb({ ERROR: 'Login Error.  Verify Username & Password.', err }));
 };

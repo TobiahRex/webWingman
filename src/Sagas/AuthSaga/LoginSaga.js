@@ -1,16 +1,16 @@
 import { call, put } from 'redux-saga/effects';
-import apiActions from '../../Redux/ApiRedux';
-import loginActions from '../../Redux/AuthRedux';
+import authActions from '../../Redux/AuthRedux';
 import userActions from '../../Redux/UserRedux';
+import apiActions from '../../Redux/ApiRedux';
 
 export default function* login(api, action) {
-  const response = yield call(api.login(action.user));
+  const response = yield call(() => api.login(action));
   if (response.ok) {
-    yield [put(loginActions.loginSuccess(response.data, response.data.SUCCESS)),
+    yield [put(authActions.loginSuccess(response.data, response.data.SUCCESS)),
       put(userActions.userReceived(response.data.user)),
     put(apiActions.apiSuccess())];
   } else {
-    yield [put(loginActions.loginFailure(response.problem, response.data.ERROR)),
-      put(apiActions.apiFailure())];
+    yield [put(authActions.loginFailure(response.data.ERROR)),
+      put(apiActions.apiFail())];
   }
 }

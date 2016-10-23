@@ -45,8 +45,10 @@ class Login extends React.Component {
 
   submitLogin = () => {
     const { email, password } = this.state;
-    this.setState({ email: '', password: '' },
-    () => this.props.loginUser(email, password));
+    this.setState({
+      email: '',
+      password: '',
+    }, () => this.props.loginUser({ email, password }));
   }
 
   closeDialog = (type) => {
