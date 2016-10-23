@@ -21,7 +21,6 @@ class RegisterContainer extends React.Component {
       confirmPassword: '',
       error: '',
       success: '',
-      statusMsg: '',
     };
     this.RegisterProps = {
       title: 'Register',
@@ -74,10 +73,9 @@ class RegisterContainer extends React.Component {
       this.setState({
         error: '',
         success: this.props.statusMsg,
-      }, () => {
-        this.propsJSX.success.open = true;
-        this.props.registerUser({ email, firstName, lastName, password });
-      });
+      }, () => (this.propsJSX.success.open = true));
+    } else {
+      this.props.registerUser({ email, firstName, lastName, password });
     }
   }
 
@@ -87,13 +85,15 @@ class RegisterContainer extends React.Component {
     this.setState({ [type]: '' });
   }
 
-  render = () => (
+  render = () => {
+    console.log('this.state.success: ', this.state.success);
+    return (
     <div>
       <RegisterCard {...this.RegisterProps} />
       <Dialog {...this.propsJSX.error} > {this.state.error} </Dialog>
       <Dialog {...this.propsJSX.success} > {this.state.success} </Dialog>
     </div>
-  );
+  );}
 }
 
 const mapDispatchToProps = dispatch => ({
