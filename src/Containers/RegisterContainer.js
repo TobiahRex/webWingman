@@ -6,10 +6,7 @@ import Actions from '../Redux/AuthRedux';
 
 class RegisterContainer extends React.Component {
   static propTypes = {
-    apiSuccess: PropTypes.bool,
-    apiError: PropTypes.bool,
     registerUser: PropTypes.func.isRequired,
-    statusMsg: PropTypes.string,
   }
   constructor(props) {
     super(props);
@@ -21,13 +18,15 @@ class RegisterContainer extends React.Component {
       confirmPassword: '',
       error: '',
       success: '',
-      statusMsg: this.props.statusMsg ? this.showDialog : this.props.statusMsg,
+      attepted: false,
     };
+
     this.RegisterProps = {
       title: 'Register',
       submitNewUser: () => this.submitNewUser(this.state),
       onInputChange: this.onInputChange,
     };
+
     this.propsJSX = {
       error: {
         title: 'Password Error',
@@ -58,6 +57,22 @@ class RegisterContainer extends React.Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (!this.state.attempted) return;
+
+    if (nextProps.apiSuccess) {
+      this.setState({
+        attempted: false,
+        success: this.state.statusMsg,
+      }, () => (this.propsJSX.success.open = true));
+    } else {
+      this.setState({
+        atttempted: false,
+        error: this.state.statusMsg,
+      }, () => (this.propsJSX.error.open = true));
+    }
+  }
+
   onInputChange = (value, inputId) => this.setState({ [inputId]: value });
 
   submitNewUser = ({ email, firstName, lastName, password }) => {
@@ -67,23 +82,15 @@ class RegisterContainer extends React.Component {
         success: '',
       }, () => (this.propsJSX.error.open = true));
     } else {
-      this.props.registerUser({ email, firstName, lastName, password });
-    }
-  }
-
-  showDialog = () => {
-    if (this.state.apiError) {
-      this.setState({ error: this.state.statusMsg },
-        () => (this.propsJSX.error.open = true));
-    } else {
-      this.setState({ success: this.state.statusMsg },
-      () => (this.propsJSX.success.opne = true));
+      this.setState({ attempted: true },
+      () => this.props.registerUser({ email, firstName, lastName, password }));
     }
   }
 
   clearDialog = (type) => {
     if (type === 'error') this.propsJSX.error.open = false;
     this.propsJSX.success.open = false;
+
     this.setState({
       [type]: '',
       statusMsg: '',
@@ -106,6 +113,7 @@ const mapStateToProps = state => ({
   apiSuccess: state.api.success,
   apiError: state.api.error,
   statusMsg: state.auth.status,
+  active: state.auth.active,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegisterContainer);
